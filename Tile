@@ -1,0 +1,17 @@
+class Tile 
+{
+    int ID;
+    String type;
+    
+    public Tile(int id, String ty)
+    {
+        ID = id;
+        type = ty;
+    }
+    
+    public Tile()
+    {
+        ID = 0;
+        type = "":
+    }
+}
