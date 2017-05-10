@@ -1,33 +1,26 @@
+/*
+@author Luis Najera
+5/9/17
+ */
 package com.luis.neoncity;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.luis.neoncity.Screens.PlayScreen;
 
-public class NeonCity extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img, menu;
+public class NeonCity extends Game {
+	public static final int V_WIDTH = 800;
+	public static final int V_HEIGHT = 480;
+	public SpriteBatch batch;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("8bitCity.png");
-		menu = new Texture("menu.png");
+		setScreen(new PlayScreen(this));
 	}
 
 	@Override
 	public void render () {
-		//Gdx.gl.glClearColor(1, 0, 0, 1);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		batch.begin();
-		batch.draw(img, 0, 0, 1440, 900);
-		batch.draw(menu, 50, 600);
-		batch.end();
-	}
-
-	@Override
-	public void dispose () {
-		batch.dispose();
+		super.render();
 	}
 }
