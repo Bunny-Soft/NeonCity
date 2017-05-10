@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.luis.neoncity.Screens.PlayScreen;
 
 public class NeonCity extends Game {
-	public static final int V_WIDTH = 800;
-	public static final int V_HEIGHT = 480;
+	public static final int V_WIDTH = 1080;
+	public static final int V_HEIGHT = 800;
 	public SpriteBatch batch;
 
 	@Override
