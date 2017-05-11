@@ -19,7 +19,7 @@ public class MapInputProcessor implements InputProcessor{
 
     private void moveCamera( int touch_x, int touch_y ) {
         Vector3 newPosition = getNewCameraPosition(touch_x, touch_y);
-        if(Math.abs(newPosition.x) < 100)
+        if(Math.abs(newPosition.x) < 50)
             stage.getCamera().translate(newPosition);
         last_touch_down.set(touch_x, touch_y, 0);
     }
@@ -59,7 +59,6 @@ public class MapInputProcessor implements InputProcessor{
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Gdx.app.log("Position", screenX + " " + screenY);
         moveCamera(screenX, screenY);
         return false;
     }
