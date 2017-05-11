@@ -11,7 +11,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.luis.neoncity.Input.MapInputProcessor;
+import com.luis.neoncity.Input.TiledMapStage;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Scenes.Hud;
 
@@ -20,8 +20,6 @@ import com.luis.neoncity.Scenes.Hud;
  */
 
 public class PlayScreen implements Screen {
-    MapInputProcessor inputProcessor;
-
     private NeonCity game;
     public  OrthographicCamera gameCam;
     private Viewport gamePort;
@@ -37,7 +35,7 @@ public class PlayScreen implements Screen {
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, gameCam);
-        stage = new Stage(gamePort, sb);
+
         hud = new Hud(sb);
 
         mapLoader = new TmxMapLoader();
@@ -45,8 +43,9 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
 
-        inputProcessor = new MapInputProcessor(stage);
-        Gdx.input.setInputProcessor(inputProcessor);
+        stage = new TiledMapStage(gamePort, map);
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
