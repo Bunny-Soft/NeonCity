@@ -22,7 +22,6 @@ public class Hud {
     private Integer funds;
     private Integer population;
     private String cityName;
-
     Label fundsLabel;
     Label popLabel;
     Label nameLabel;
