@@ -1,0 +1,151 @@
+<html>
+<head>
+<title>build.gradle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(169,183,198); }
+.s1 { color: rgb(106,135,89); }
+.s2 { color: rgb(104,151,187); }
+.s3 { color: rgb(128,128,128); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+build.gradle</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">android { 
+    buildToolsVersion </span><span class="s1">&quot;23.0.1&quot;</span><span class="s0"> 
+    compileSdkVersion </span><span class="s2">20</span><span class="s0"> 
+    sourceSets { 
+        main { 
+            manifest.srcFile </span><span class="s1">'AndroidManifest.xml'</span><span class="s0"> 
+            java.srcDirs = [</span><span class="s1">'src'</span><span class="s0">] 
+            aidl.srcDirs = [</span><span class="s1">'src'</span><span class="s0">] 
+            renderscript.srcDirs = [</span><span class="s1">'src'</span><span class="s0">] 
+            res.srcDirs = [</span><span class="s1">'res'</span><span class="s0">] 
+            assets.srcDirs = [</span><span class="s1">'assets'</span><span class="s0">] 
+            jniLibs.srcDirs = [</span><span class="s1">'libs'</span><span class="s0">] 
+        } 
+ 
+        instrumentTest.setRoot(</span><span class="s1">'tests'</span><span class="s0">) 
+    } 
+    packagingOptions { 
+        exclude </span><span class="s1">'META-INF/robovm/ios/robovm.xml'</span><span class="s0"> 
+    } 
+    defaultConfig { 
+        applicationId </span><span class="s1">&quot;com.luis.neoncity&quot;</span><span class="s0"> 
+        minSdkVersion </span><span class="s2">9</span><span class="s0"> 
+        targetSdkVersion </span><span class="s2">20</span><span class="s0"> 
+    } 
+} 
+ 
+ 
+</span><span class="s3">// called every time gradle gets executed, takes the native dependencies of</span><span class="s0"> 
+</span><span class="s3">// the natives configuration, and extracts them to the proper libs/ folders</span><span class="s0"> 
+</span><span class="s3">// so they get packed with the APK.</span><span class="s0"> 
+task copyAndroidNatives() {  
+    file(</span><span class="s1">&quot;libs/armeabi/&quot;</span><span class="s0">).mkdirs(); 
+    file(</span><span class="s1">&quot;libs/armeabi-v7a/&quot;</span><span class="s0">).mkdirs(); 
+    file(</span><span class="s1">&quot;libs/arm64-v8a/&quot;</span><span class="s0">).mkdirs(); 
+    file(</span><span class="s1">&quot;libs/x86_64/&quot;</span><span class="s0">).mkdirs(); 
+    file(</span><span class="s1">&quot;libs/x86/&quot;</span><span class="s0">).mkdirs(); 
+ 
+    configurations.natives.files.each { jar -&gt; 
+        def outputDir = null 
+        if(jar.name.endsWith(</span><span class="s1">&quot;natives-arm64-v8a.jar&quot;</span><span class="s0">)) outputDir = file(</span><span class="s1">&quot;libs/arm64-v8a&quot;</span><span class="s0">) 
+        if(jar.name.endsWith(</span><span class="s1">&quot;natives-armeabi-v7a.jar&quot;</span><span class="s0">)) outputDir = file(</span><span class="s1">&quot;libs/armeabi-v7a&quot;</span><span class="s0">)         
+        if(jar.name.endsWith(</span><span class="s1">&quot;natives-armeabi.jar&quot;</span><span class="s0">)) outputDir = file(</span><span class="s1">&quot;libs/armeabi&quot;</span><span class="s0">) 
+        if(jar.name.endsWith(</span><span class="s1">&quot;natives-x86_64.jar&quot;</span><span class="s0">)) outputDir = file(</span><span class="s1">&quot;libs/x86_64&quot;</span><span class="s0">) 
+        if(jar.name.endsWith(</span><span class="s1">&quot;natives-x86.jar&quot;</span><span class="s0">)) outputDir = file(</span><span class="s1">&quot;libs/x86&quot;</span><span class="s0">) 
+        if(outputDir != null) { 
+            copy { 
+                from zipTree(jar) 
+                into outputDir 
+                include </span><span class="s1">&quot;*.so&quot;</span><span class="s0"> 
+            } 
+        } 
+    } 
+} 
+ 
+task run(type: Exec) { 
+    def path 
+    def localProperties = project.file(</span><span class="s1">&quot;../local.properties&quot;</span><span class="s0">) 
+    if (localProperties.exists()) { 
+        Properties properties = new Properties() 
+        localProperties.withInputStream { instr -&gt; 
+            properties.load(instr) 
+        } 
+        def sdkDir = properties.getProperty(</span><span class="s1">'sdk.dir'</span><span class="s0">) 
+        if (sdkDir) { 
+            path = sdkDir 
+        } else { 
+            path = </span><span class="s1">&quot;</span><span class="s0">$System.env.ANDROID_HOME</span><span class="s1">&quot;</span><span class="s0"> 
+        } 
+    } else { 
+        path = </span><span class="s1">&quot;</span><span class="s0">$System.env.ANDROID_HOME</span><span class="s1">&quot;</span><span class="s0"> 
+    } 
+ 
+    def adb = path + </span><span class="s1">&quot;/platform-tools/adb&quot;</span><span class="s0"> 
+    commandLine </span><span class="s1">&quot;</span><span class="s0">$adb</span><span class="s1">&quot;</span><span class="s0">, </span><span class="s1">'shell'</span><span class="s0">, </span><span class="s1">'am'</span><span class="s0">, </span><span class="s1">'start'</span><span class="s0">, </span><span class="s1">'-n'</span><span class="s0">, </span><span class="s1">'com.luis.neoncity/com.luis.neoncity.AndroidLauncher'</span><span class="s0"> 
+} 
+ 
+</span><span class="s3">// sets up the Android Eclipse project, using the old Ant based build.</span><span class="s0"> 
+eclipse { 
+    </span><span class="s3">// need to specify Java source sets explicitly, SpringSource Gradle Eclipse plugin</span><span class="s0"> 
+    </span><span class="s3">// ignores any nodes added in classpath.file.withXml</span><span class="s0"> 
+    sourceSets { 
+        main { 
+            java.srcDirs </span><span class="s1">&quot;src&quot;</span><span class="s0">, </span><span class="s1">'gen'</span><span class="s0"> 
+        } 
+    } 
+ 
+    jdt { 
+        sourceCompatibility = </span><span class="s2">1.6</span><span class="s0"> 
+        targetCompatibility = </span><span class="s2">1.6</span><span class="s0"> 
+    } 
+ 
+    classpath { 
+        plusConfigurations += [ project.configurations.compile ]         
+        containers </span><span class="s1">'com.android.ide.eclipse.adt.ANDROID_FRAMEWORK'</span><span class="s0">, </span><span class="s1">'com.android.ide.eclipse.adt.LIBRARIES'       </span><span class="s0"> 
+    } 
+ 
+    project { 
+        name = appName + </span><span class="s1">&quot;-android&quot;</span><span class="s0"> 
+        natures </span><span class="s1">'com.android.ide.eclipse.adt.AndroidNature'</span><span class="s0"> 
+        buildCommands.clear(); 
+        buildCommand </span><span class="s1">&quot;com.android.ide.eclipse.adt.ResourceManagerBuilder&quot;</span><span class="s0"> 
+        buildCommand </span><span class="s1">&quot;com.android.ide.eclipse.adt.PreCompilerBuilder&quot;</span><span class="s0"> 
+        buildCommand </span><span class="s1">&quot;org.eclipse.jdt.core.javabuilder&quot;</span><span class="s0"> 
+        buildCommand </span><span class="s1">&quot;com.android.ide.eclipse.adt.ApkBuilder&quot;</span><span class="s0"> 
+    } 
+} 
+ 
+</span><span class="s3">// sets up the Android Idea project, using the old Ant based build.</span><span class="s0"> 
+idea { 
+    module { 
+        sourceDirs += file(</span><span class="s1">&quot;src&quot;</span><span class="s0">); 
+        scopes = [ COMPILE: [plus:[project.configurations.compile]]]         
+ 
+        iml { 
+            withXml { 
+                def node = it.asNode() 
+                def builder = NodeBuilder.newInstance(); 
+                builder.current = node; 
+                builder.component(name: </span><span class="s1">&quot;FacetManager&quot;</span><span class="s0">) { 
+                    facet(type: </span><span class="s1">&quot;android&quot;</span><span class="s0">, name: </span><span class="s1">&quot;Android&quot;</span><span class="s0">) { 
+                        configuration { 
+                            option(name: </span><span class="s1">&quot;UPDATE_PROPERTY_FILES&quot;</span><span class="s0">, value:</span><span class="s1">&quot;true&quot;</span><span class="s0">) 
+                        } 
+                    } 
+                } 
+            } 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>
