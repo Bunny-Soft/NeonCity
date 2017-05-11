@@ -5,18 +5,19 @@
 package com.luis.neoncity;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.luis.neoncity.Screens.PlayScreen;
 
 public class NeonCity extends Game {
-	public static final int V_WIDTH = 1080;
-	public static final int V_HEIGHT = 800;
+	public static final int V_WIDTH = 1366;
+	public static final int V_HEIGHT = 768;
 	public SpriteBatch batch;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		setScreen(new PlayScreen(this));
+		setScreen(new PlayScreen(this, batch));
 	}
 
 	@Override
