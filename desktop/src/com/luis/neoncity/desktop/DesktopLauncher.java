@@ -7,9 +7,9 @@ import com.luis.neoncity.NeonCity;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Title";
-		config.height = 768;
+		config.title = "NeonCity";
 		config.width = 1366;
+		config.height = 768;
 		new LwjglApplication(new NeonCity(), config);
 	}
 }
