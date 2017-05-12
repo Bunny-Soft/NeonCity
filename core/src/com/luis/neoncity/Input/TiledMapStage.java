@@ -1,5 +1,6 @@
 package com.luis.neoncity.Input;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -46,8 +47,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 
     private void moveCamera( int touch_x, int touch_y ) {
         Vector3 newPosition = getNewCameraPosition(touch_x, touch_y);
-        if(Math.abs(newPosition.x) < 50)
-            stage.getCamera().translate(newPosition);
+        stage.getCamera().translate(newPosition);
         last_touch_down.set(touch_x, touch_y, 0);
     }
 
@@ -59,7 +59,14 @@ public class TiledMapStage extends Stage implements InputProcessor{
     }
 
     @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        last_touch_down.set(screenX, screenY, 0);
+        return super.touchDown(screenX, screenY, pointer, button);
+    }
+
+    @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        Gdx.app.log("Touch at", screenX + ", " + screenY);
         moveCamera(screenX, screenY);
         return false;
     }
