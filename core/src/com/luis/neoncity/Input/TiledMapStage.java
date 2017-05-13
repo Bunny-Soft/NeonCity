@@ -26,22 +26,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
         stage = this;
 
         for (MapLayer layer : tiledMap.getLayers()) {
-            TiledMapTileLayer tiledLayer = (TiledMapTileLayer)layer;
-            createActorsForLayer(tiledLayer);
-        }
-    }
-
-    private void createActorsForLayer(TiledMapTileLayer tiledLayer) {
-        for (int x = 0; x < tiledLayer.getWidth(); x++) {
-            for (int y = 0; y < tiledLayer.getHeight(); y++) {
-                TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);
-                TiledMapActor actor = new TiledMapActor(tiledMap, tiledLayer, cell);
-                actor.setBounds(x * tiledLayer.getTileWidth(), y * tiledLayer.getTileHeight(),
-                        tiledLayer.getTileWidth(), tiledLayer.getTileHeight());
-                addActor(actor);
-                EventListener eventListener = new TiledMapClickListener(actor);
-                actor.addListener(eventListener);
-            }
+            //TODO assign each tile an object stored in a 2d array with information on its content(buildings and such)
         }
     }
 
@@ -61,6 +46,8 @@ public class TiledMapStage extends Stage implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         last_touch_down.set(screenX, screenY, 0);
+        Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
+        System.out.println((int)(test.x / 16) +  ", " + (int)(test.y /16));
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
