@@ -27,13 +27,9 @@ public class Hud {
     private Integer population;
     private String cityName;
 
-    Label fundsLabel;
-    Label popLabel;
-    Label nameLabel;
-
-    TextureAtlas atlas;
-    Skin skin;
-    ImageButton.ImageButtonStyle select;
+    private Label fundsLabel;
+    private Label popLabel;
+    private Label nameLabel;
 
     public Hud(SpriteBatch sb) {
         //TODO: replace with global variables, loaded from files
@@ -60,20 +56,6 @@ public class Hud {
         table.add(fundsLabel).expandX().padTop(10);
         table.add(popLabel).expandX().padTop(10);
 
-        atlas = new TextureAtlas("ui.atlas");
-        skin = new Skin(atlas);
-
-        select = new ImageButton.ImageButtonStyle();
-        select.up = skin.getDrawable("Button");
-        select.down = skin.getDrawable("ButtonP");
-        select.over = skin.getDrawable("ButtonP");
-        select.pressedOffsetX = 1;
-        select.pressedOffsetY = -1;
-
-        ImageButton button = new ImageButton(select);
-        button.setPosition(0f, 0f);
-        button.setSize(64f, 64f);
         stage.addActor(table);
-        stage.addActor(button);
     }
 }
