@@ -22,7 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.luis.neoncity.NeonCity;
 
 /**
- * Created by Luis on 5/9/2017.
+ * Created by Luis and Jacob on 5/9/2017.
  */
 
 public class Hud implements InputProcessor{
@@ -49,25 +49,17 @@ public class Hud implements InputProcessor{
         stage = new Stage(viewport, sb);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-        final TextButton button = new TextButton("Click Me",skin,"default");
-        button.setWidth(200);
-        button.setHeight(50);
+        for(int r = 1; r <= 8; r++)
+        {
+            for(int c = 1; c <= 2; c++)
+            {
+                TextButton button = new TextButton("",skin,"default");
+                button.setSize(50,50);
+                stage.addActor(button);
+                button.setPosition(c*50,r*50+150);
 
-        final Dialog dialog = new Dialog("Dank Memes",skin);
-
-        button.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                dialog.show(stage);
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        dialog.hide();
-                    }
-                }, 1);
             }
-        });
-        stage.addActor(button);
+        }
 
         Gdx.input.setInputProcessor(stage);
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\yj366153\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.9.6\57c2831c870743712b808384187ea856e541878f\gdx-backend-android-1.9.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57c2831c870743712b808384187ea856e541878f">
+        <dex dex="C:\Users\yj366153\Desktop\NeonCity\NeonCity\android\build\intermediates\pre-dexed\debug\gdx-backend-android-1.9.6_8876b723f46eb40eec2ac46376c558f895d72bd7.jar" />
+    </item>
+    <item
+        jar="C:\Users\yj366153\Desktop\NeonCity\NeonCity\core\build\libs\core-1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="93819e6a7f10f7dbd3c81b9b4b0a8e08fb96685f">
+        <dex dex="C:\Users\yj366153\Desktop\NeonCity\NeonCity\android\build\intermediates\pre-dexed\debug\core-1.0_e3ffaa7c675434e67578ce4e54c4bfb43a2c515e.jar" />
+    </item>
+    <item
+        jar="C:\Users\yj366153\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.9.6\c249ef4060a4fada952f278455c8f7b9cba3c18a\gdx-box2d-1.9.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c249ef4060a4fada952f278455c8f7b9cba3c18a">
+        <dex dex="C:\Users\yj366153\Desktop\NeonCity\NeonCity\android\build\intermediates\pre-dexed\debug\gdx-box2d-1.9.6_b9335d12a58ee851f2501166c8027af8eea6ba44.jar" />
+    </item>
+    <item
+        jar="C:\Users\yj366153\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.9.6\47d1e9b890e364ec28f128e9bb3b9a12a94c164\gdx-1.9.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="047d1e9b890e364ec28f128e9bb3b9a12a94c164">
+        <dex dex="C:\Users\yj366153\Desktop\NeonCity\NeonCity\android\build\intermediates\pre-dexed\debug\gdx-1.9.6_7024bafe3cfa186f0b85d5db6ce604ceaab8eb0c.jar" />
+    </item>
+
+</items>
