@@ -1,5 +1,6 @@
 package com.luis.neoncity.Screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,40 +15,64 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.neoncity.NeonCity;
 
 /**
  * Created by jz367071 on 5/12/2017.
  */
 
 public class MainMenu implements Screen {
-    Label outputLabel;
-    Stage stage;
+    private Stage stage;
     Image sprite;
     Image title;
     SpriteBatch sb;
-    public MainMenu(SpriteBatch sb) {
-        this.sb = sb;
+    NeonCity game;
+    public MainMenu(NeonCity g, SpriteBatch s) {
+        this.game = g;
+        this.sb = s;
         sb.begin();
+
         //removed create(); and inserted its code where it was called
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
-        TextButton start = new TextButton("Start", skin, "default");
-        start.setSize(400, 200);
+
+        TextButton start = new TextButton("New Game", skin, "default");
+        start.setSize(250, 100);
+        start.setPosition(950, 600);
+        start.addListener(new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                sb.end();
+                game.setScreen(new PlayScreen(game, sb));
+            }
+        });
+
+
+        TextButton load = new TextButton("Load Game", skin, "default");
+        load.setSize(250, 100);
+        load.setPosition(950, 490);
+
+        TextButton options = new TextButton("Options", skin, "default");
+        options.setSize(250, 100);
+        options.setPosition(950, 380);
+
         //sprite is the background image for the title
         sprite = new Image(new Texture("8bitCity.png"));
-        title = new Image(new Texture("title.jpg"));
-        title.setSize(400,400);
-        title.setPosition(30, 500);
+        sprite.setSize(1366, 768);
+
+        title = new Image(new Texture("menu.png"));
+        title.setPosition(30, 600);
 
         //adding image and button to display in order
         stage.addActor(sprite);
         stage.addActor(title);
         stage.addActor(start);
-
-
+        stage.addActor(load);
+        stage.addActor(options);
     }
 
     @Override
@@ -57,7 +82,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
-
         stage.act();
         stage.draw();
     }

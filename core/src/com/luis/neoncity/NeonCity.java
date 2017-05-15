@@ -7,7 +7,6 @@ package com.luis.neoncity;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.luis.neoncity.Screens.MainMenu;
-import com.luis.neoncity.Screens.PlayScreen;
 
 public class NeonCity extends Game {
 	public static final int V_WIDTH = 1366;
@@ -17,7 +16,7 @@ public class NeonCity extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		setScreen(new MainMenu(batch));
+		setScreen(new MainMenu(this, batch));
 	}
 
 	@Override
