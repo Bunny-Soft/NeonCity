@@ -5,7 +5,6 @@
 package com.luis.neoncity;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.luis.neoncity.Screens.PlayScreen;
 

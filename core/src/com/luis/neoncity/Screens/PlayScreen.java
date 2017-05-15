@@ -1,6 +1,7 @@
 package com.luis.neoncity.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -45,7 +46,8 @@ public class PlayScreen implements Screen {
 
         stage = new TiledMapStage(gamePort, map);
 
-        Gdx.input.setInputProcessor(stage);
+        InputMultiplexer im = new InputMultiplexer(stage, hud.stage);
+        Gdx.input.setInputProcessor(im);
     }
 
     @Override
