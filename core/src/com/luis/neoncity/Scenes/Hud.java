@@ -7,8 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -19,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.luis.neoncity.Buildings.ResidentialBuilding;
 import com.luis.neoncity.NeonCity;
 
 /**
@@ -39,6 +43,7 @@ public class Hud implements InputProcessor{
     private Label popLabel;
     private Label nameLabel;
 
+    private Image cursor;
     public Hud(SpriteBatch sb) {
         //TODO: replace with global variables, loaded from files
         funds = 20000;
@@ -48,6 +53,8 @@ public class Hud implements InputProcessor{
         viewport = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        cursor = new Image(new Texture("cursor.png"));
 
         for(int r = 1; r <= 8; r++)
         {
@@ -61,13 +68,15 @@ public class Hud implements InputProcessor{
             }
         }
 
-        Gdx.input.setInputProcessor(stage);
-
         Table table = new Table();
         table.top();
         table.setFillParent(true);
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("pixel.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 32;
+        BitmapFont font = generator.generateFont(parameter); // font size 12 pixels
+        generator.dispose();
 
-        BitmapFont font = new BitmapFont();
         //font.getData().setScale(3f);
         Label.LabelStyle style = new Label.LabelStyle(font, com.badlogic.gdx.graphics.Color.WHITE);
 
@@ -80,6 +89,7 @@ public class Hud implements InputProcessor{
         table.add(popLabel).expandX().padTop(10);
 
         stage.addActor(table);
+        stage.addActor(cursor);
     }
 
     @Override
@@ -99,6 +109,9 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Image res = new Image(new Texture("res.png"));
+        res.setPosition(screenX, Gdx.graphics.getHeight() - screenY);
+        stage.addActor(res);
         return false;
     }
 
@@ -114,6 +127,8 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
+        cursor.setPosition(screenX, ((Gdx.graphics.getHeight() - screenY)));
+        stage.act();
         return false;
     }
 

@@ -5,11 +5,13 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.luis.neoncity.Input.TiledMapStage;
@@ -31,6 +33,7 @@ public class PlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+    Image sprite;
 
     public PlayScreen(NeonCity game, SpriteBatch sb) {
         this.game = game;
@@ -46,7 +49,7 @@ public class PlayScreen implements Screen {
 
         stage = new TiledMapStage(gamePort, map);
 
-        InputMultiplexer im = new InputMultiplexer(stage, hud.stage);
+        InputMultiplexer im = new InputMultiplexer(hud, stage);
         Gdx.input.setInputProcessor(im);
     }
 

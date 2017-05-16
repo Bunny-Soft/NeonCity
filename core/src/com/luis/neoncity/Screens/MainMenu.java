@@ -30,6 +30,7 @@ public class MainMenu implements Screen {
     Image title;
     SpriteBatch sb;
     NeonCity game;
+    Skin skin;
     public MainMenu(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
@@ -38,11 +39,18 @@ public class MainMenu implements Screen {
         //removed create(); and inserted its code where it was called
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        try {
+            skin = new Skin(Gdx.files.internal("uiskin.json"));
+        }
+        catch(Exception e){
+            Gdx.app.log("fuck","its bad");
+            skin = new Skin();
+        }
 
         TextButton start = new TextButton("New Game", skin, "default");
-        start.setSize(250, 100);
-        start.setPosition(950, 600);
+        start.setSize(300, 100);
+        start.setPosition(900, 550);
         start.addListener(new ChangeListener() {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
@@ -53,19 +61,19 @@ public class MainMenu implements Screen {
 
 
         TextButton load = new TextButton("Load Game", skin, "default");
-        load.setSize(250, 100);
-        load.setPosition(950, 490);
+        load.setSize(300, 100);
+        load.setPosition(900, 440);
 
         TextButton options = new TextButton("Options", skin, "default");
-        options.setSize(250, 100);
-        options.setPosition(950, 380);
+        options.setSize(300, 100);
+        options.setPosition(900, 330);
 
         //sprite is the background image for the title
         sprite = new Image(new Texture("8bitCity.png"));
         sprite.setSize(1366, 768);
 
         title = new Image(new Texture("menu.png"));
-        title.setPosition(30, 600);
+        title.setPosition(30, 550);
 
         //adding image and button to display in order
         stage.addActor(sprite);
