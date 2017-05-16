@@ -1,6 +1,8 @@
 package com.luis.neoncity.Input;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.luis.neoncity.Buildings.ResidentialBuilding;
+import com.luis.neoncity.Tools.City;
 
 /**
  * Created by Luis on 5/11/2017.
@@ -18,10 +21,13 @@ public class TiledMapStage extends Stage implements InputProcessor{
     private TiledMap tiledMap;
     private Vector3 lastTouch;
     private Stage stage;
+    City city;
 
-    public TiledMapStage(Viewport viewport, TiledMap tiledMap) {
+    public TiledMapStage(Viewport viewport, TiledMap tiledMap, City city) {
         super(viewport);
         this.tiledMap = tiledMap;
+        this.city = city;
+
         lastTouch = new Vector3();
         stage = this;
 
@@ -49,8 +55,9 @@ public class TiledMapStage extends Stage implements InputProcessor{
         Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
         System.out.println((int)(test.x / 16) +  ", " + (int)(test.y /16));
 
-        ResidentialBuilding res = new ResidentialBuilding(new Vector2((int)(test.x / 16), (int)(test.y /16)));
-        stage.addActor(res);
+        ResidentialBuilding res = new ResidentialBuilding(test);
+        city.buildings.add(res);
+
         return super.touchDown(screenX, screenY, pointer, button);
     }
 

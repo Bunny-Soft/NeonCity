@@ -1,6 +1,7 @@
 package com.luis.neoncity.Tools;
 
 import com.luis.neoncity.Buildings.Building;
+import com.luis.neoncity.Buildings.ResidentialBuilding;
 
 import java.util.ArrayList;
 
@@ -14,13 +15,13 @@ public class City {
     private Integer population;
 
 
-    ArrayList<Building> buildings;
+    public ArrayList<ResidentialBuilding> buildings;
 
     public City(String cityName){
         this.cityName = cityName;
         this.funds = 200000;
         this.population = 0;
-        buildings = new ArrayList<Building>();
+        buildings = new ArrayList<ResidentialBuilding>();
     }
     public String getCityName() {
         return cityName;
@@ -46,11 +47,11 @@ public class City {
         this.population = population;
     }
 
-    public ArrayList<Building> getBuildings() {
+    public ArrayList<ResidentialBuilding> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(ArrayList<Building> buildings) {
+    public void setBuildings(ArrayList<ResidentialBuilding> buildings) {
         this.buildings = buildings;
     }
 }
