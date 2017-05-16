@@ -5,21 +5,25 @@ import com.luis.neoncity.Buildings.Building;
 import java.util.ArrayList;
 
 /**
- * Created by Luis on 5/16/2017.
+ * Created by Luis on 5/16/2017  and Changed by Zach on 5/16/17.
  */
 
 public class City {
     private String cityName;
     private Integer funds;
     private Integer population;
+    private Integer pollution;
+    private Double happiness;
 
 
     ArrayList<Building> buildings;
 
     public City(String cityName){
         this.cityName = cityName;
-        this.funds = 200000;
-        this.population = 0;
+        this.funds = 2000000;
+        this.population = 5;
+        pollution = 0;
+        happiness = 100.00;
         buildings = new ArrayList<Building>();
     }
     public String getCityName() {
@@ -46,6 +50,26 @@ public class City {
         this.population = population;
     }
 
+    public Integer getPollution()
+    {
+        return pollution;
+    }
+
+    public void setPollution(Integer pollution)
+    {
+        this.pollution = pollution;
+    }
+
+    public Double getHappiness()
+    {
+        return happiness/100;
+    }
+
+    public void setHappiness(Double happiness)
+    {
+        this.happiness = happiness;
+    }
+
     public ArrayList<Building> getBuildings() {
         return buildings;
     }
@@ -53,4 +77,6 @@ public class City {
     public void setBuildings(ArrayList<Building> buildings) {
         this.buildings = buildings;
     }
+    //buildings are initialized with Building(Vector2 location, this, Boolean IfBuildingIsInUse);
+    //buildings are the superclass to all other non-road structures.
 }
