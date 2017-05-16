@@ -5,18 +5,17 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.luis.neoncity.Input.TiledMapStage;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Scenes.Hud;
+import com.luis.neoncity.Tools.City;
 
 /**
  * Created by Luis on 5/9/2017.
@@ -24,6 +23,8 @@ import com.luis.neoncity.Scenes.Hud;
 
 public class PlayScreen implements Screen {
     private NeonCity game;
+    public City city;
+
     public  OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
@@ -33,14 +34,15 @@ public class PlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-    Image sprite;
 
-    public PlayScreen(NeonCity game, SpriteBatch sb) {
+    public PlayScreen(NeonCity game, SpriteBatch sb, City city) {
         this.game = game;
+        this.city = city;
+
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, gameCam);
 
-        hud = new Hud(sb);
+        hud = new Hud(sb, city);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("TestMap.tmx");
@@ -71,7 +73,6 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
     }

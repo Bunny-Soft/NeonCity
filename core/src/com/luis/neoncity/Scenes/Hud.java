@@ -6,24 +6,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.luis.neoncity.Buildings.ResidentialBuilding;
 import com.luis.neoncity.NeonCity;
+import com.luis.neoncity.Screens.PlayScreen;
+import com.luis.neoncity.Tools.City;
 
 /**
  * Created by Luis and Jacob on 5/9/2017.
@@ -34,21 +28,15 @@ public class Hud implements InputProcessor{
     public Stage stage;
     public Skin skin;
 
-    //TODO: Create a GameManger class for global variables such as these
-    private Integer funds;
-    private Integer population;
-    private String cityName;
+    City city;
 
     private Label fundsLabel;
     private Label popLabel;
     private Label nameLabel;
 
     private Image cursor;
-    public Hud(SpriteBatch sb) {
-        //TODO: replace with global variables, loaded from files
-        funds = 20000;
-        population = 1000000;
-        cityName = "Dallas";
+    public Hud(SpriteBatch sb, City city) {
+        this.city = city;
 
         viewport = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -60,7 +48,7 @@ public class Hud implements InputProcessor{
         {
             for(int c = 1; c <= 2; c++)
             {
-                TextButton button = new TextButton("",skin,"default");
+                TextButton button = new TextButton(""+c*r,skin,"default");
                 button.setSize(50,50);
                 stage.addActor(button);
                 button.setPosition(c*50,r*50+150);
@@ -77,12 +65,11 @@ public class Hud implements InputProcessor{
         BitmapFont font = generator.generateFont(parameter); // font size 12 pixels
         generator.dispose();
 
-        //font.getData().setScale(3f);
         Label.LabelStyle style = new Label.LabelStyle(font, com.badlogic.gdx.graphics.Color.WHITE);
 
-        fundsLabel = new Label("$" + String.format("%07d", funds), style);
-        popLabel = new Label(String.format("%08d", population), style);
-        nameLabel = new Label(cityName, style);
+        fundsLabel = new Label("$" + String.format("%07d", city.getFunds()), style);
+        popLabel = new Label(String.format("%08d", city.getPopulation()), style);
+        nameLabel = new Label(city.getCityName(), style);
 
         table.add(nameLabel).expandX().padTop(10);
         table.add(fundsLabel).expandX().padTop(10);

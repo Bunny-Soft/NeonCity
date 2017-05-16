@@ -1,14 +1,14 @@
 package com.luis.neoncity.Input;
 
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.luis.neoncity.Buildings.ResidentialBuilding;
 
 /**
  * Created by Luis on 5/11/2017.
@@ -49,6 +49,8 @@ public class TiledMapStage extends Stage implements InputProcessor{
         Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
         System.out.println((int)(test.x / 16) +  ", " + (int)(test.y /16));
 
+        ResidentialBuilding res = new ResidentialBuilding(new Vector2((int)(test.x / 16), (int)(test.y /16)));
+        stage.addActor(res);
         return super.touchDown(screenX, screenY, pointer, button);
     }
 

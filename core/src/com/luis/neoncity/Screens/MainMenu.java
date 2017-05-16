@@ -1,24 +1,18 @@
 package com.luis.neoncity.Screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.neoncity.NeonCity;
+import com.luis.neoncity.Tools.City;
 
 /**
  * Created by jz367071 on 5/12/2017.
@@ -44,7 +38,6 @@ public class MainMenu implements Screen {
             skin = new Skin(Gdx.files.internal("uiskin.json"));
         }
         catch(Exception e){
-            Gdx.app.log("fuck","its bad");
             skin = new Skin();
         }
 
@@ -55,7 +48,7 @@ public class MainMenu implements Screen {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 sb.end();
-                game.setScreen(new PlayScreen(game, sb));
+                game.setScreen(new PlayScreen(game, sb, new City("Dallas")));
             }
         });
 
