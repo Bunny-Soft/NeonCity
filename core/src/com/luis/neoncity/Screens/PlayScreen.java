@@ -12,6 +12,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.luis.neoncity.Buildings.Building;
+import com.luis.neoncity.Buildings.ResidentialBuilding;
 import com.luis.neoncity.Input.TiledMapStage;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Scenes.Hud;
@@ -29,6 +31,7 @@ public class PlayScreen implements Screen {
     private Viewport gamePort;
     private Hud hud;
     public Stage stage;
+    SpriteBatch spriteBatch;
 
 
     private TmxMapLoader mapLoader;
@@ -38,6 +41,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(NeonCity game, SpriteBatch sb, City city) {
         this.game = game;
         this.city = city;
+        spriteBatch = sb;
 
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, gameCam);
@@ -49,7 +53,7 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
 
-        stage = new TiledMapStage(gamePort, map);
+        stage = new TiledMapStage(gamePort, map, city);
 
         InputMultiplexer im = new InputMultiplexer(hud, stage);
         Gdx.input.setInputProcessor(im);
@@ -73,7 +77,10 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
+        for(ResidentialBuilding b : city.getBuildings())
+        b.draw(spriteBatch);
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+
         hud.stage.draw();
     }
 

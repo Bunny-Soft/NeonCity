@@ -96,9 +96,6 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Image res = new Image(new Texture("res.png"));
-        res.setPosition(screenX, Gdx.graphics.getHeight() - screenY);
-        stage.addActor(res);
         return false;
     }
 
@@ -114,8 +111,8 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        cursor.setPosition(screenX, ((Gdx.graphics.getHeight() - screenY)));
-        stage.act();
+        cursor.setPosition((screenX/16) * 16, ((Gdx.graphics.getHeight() - screenY)/16)*16);
+
         return false;
     }
 
