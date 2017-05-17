@@ -55,7 +55,7 @@ public class PlayScreen implements Screen {
 
         stage = new TiledMapStage(gamePort, map, city);
 
-        InputMultiplexer im = new InputMultiplexer(hud, stage);
+        InputMultiplexer im = new InputMultiplexer(hud.stage, stage,hud );
         Gdx.input.setInputProcessor(im);
     }
 
@@ -77,11 +77,11 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        for(ResidentialBuilding b : city.getBuildings())
-        b.draw(spriteBatch);
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        //for(ResidentialBuilding b : city.getBuildings())
+        //b.draw(spriteBatch);
     }
 
     @Override

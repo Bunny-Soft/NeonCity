@@ -3,6 +3,7 @@ package com.luis.neoncity.Buildings;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.luis.neoncity.Tools.City;
@@ -16,7 +17,7 @@ public class RecreationalBuilding extends Building { //implements Building{
     protected Image sprite;
     Batch batch;
 
-    public RecreationalBuilding(Vector2 loc, City contains, Boolean inUse){
+    public RecreationalBuilding(Vector3 loc, City contains, Boolean inUse){
         super.location = loc;
         super.contains = contains;
         super.inUse = inUse;

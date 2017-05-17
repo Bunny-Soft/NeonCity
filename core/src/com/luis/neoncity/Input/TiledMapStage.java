@@ -55,7 +55,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
         Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
         System.out.println((int)(test.x / 16) +  ", " + (int)(test.y /16));
 
-        ResidentialBuilding res = new ResidentialBuilding(test);
+        ResidentialBuilding res = new ResidentialBuilding(test, city, true);
         city.buildings.add(res);
 
         return super.touchDown(screenX, screenY, pointer, button);

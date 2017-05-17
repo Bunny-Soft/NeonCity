@@ -25,7 +25,7 @@ public class City {
         this.population = 5;
         pollution = 0;
         happiness = 100.00;
-        buildings = new ArrayList<Building>()
+        buildings = new ArrayList<ResidentialBuilding>();
     }
     public String getCityName() {
         return cityName;
@@ -71,7 +71,7 @@ public class City {
         this.happiness = happiness;
     }
 
-    public ArrayList<Building> getBuildings() {
+    public ArrayList<ResidentialBuilding> getBuildings() {
         return buildings;
     }
 

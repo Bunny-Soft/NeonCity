@@ -1,8 +1,11 @@
 package com.luis.neoncity.Buildings;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.luis.neoncity.Tools.City;
@@ -11,27 +14,26 @@ import com.luis.neoncity.Tools.City;
  */
 
 
-public class Building extends Actor{
+public class Building extends Sprite {
 
-    protected Vector2 location;
-    Batch batch;
+    protected Vector3 location;
     City contains;
     Boolean inUse;
     int populationNeeded, pollutionCreated;
-
+    Texture texture;
     public Building()
     {
-
     }
 
-    public Building(Vector2 loc, City contains, boolean inUse)
+    public Building(Vector3 loc, City contains, boolean inUse)
     {
+        texture = new Texture("res.png");
         location = loc;
         this.contains = contains;
         this.inUse = inUse;
     }
 
-    public Vector2 getLocation()
+    public Vector3 getLocation()
     {
         return location;
     }
@@ -48,12 +50,12 @@ public class Building extends Actor{
 
     public void addPollution()
     {
-        if(inUse)
+            if(inUse)
             contains.setPollution(contains.getPollution() + pollutionCreated);
     }
 
     public void draw(Batch batch)
     {
-        super.draw(batch, 1.0f);
+        batch.draw(texture, location.x, location.y);
     }
 }

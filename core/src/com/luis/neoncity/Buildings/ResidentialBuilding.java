@@ -16,7 +16,7 @@ public class ResidentialBuilding extends Building { //implements Building{
     protected int populationAdded;
     protected Image sprite;
 
-    public ResidentialBuilding(Vector2 loc, City contains, Boolean inUse){
+    public ResidentialBuilding(Vector3 loc, City contains, Boolean inUse){
         super.location = loc;
         super.contains = contains;
         super.inUse = inUse;
@@ -33,10 +33,5 @@ public class ResidentialBuilding extends Building { //implements Building{
     {
         if(inUse)
             contains.setPopulation(contains.getPopulation() + populationAdded);
-    }
-
-    public void draw(Batch batch){
-
-        super.draw(batch);
     }
 }

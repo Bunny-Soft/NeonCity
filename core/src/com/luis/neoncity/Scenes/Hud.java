@@ -37,7 +37,6 @@ public class Hud implements InputProcessor{
     private Image cursor;
     public Hud(SpriteBatch sb, City city) {
         this.city = city;
-
         viewport = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -59,6 +58,7 @@ public class Hud implements InputProcessor{
         Table table = new Table();
         table.top();
         table.setFillParent(true);
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("pixel.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 32;
@@ -111,7 +111,7 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        cursor.setPosition((screenX/16) * 16, ((Gdx.graphics.getHeight() - screenY)/16)*16);
+        //cursor.setPosition((screenX/16) * 16, ((Gdx.graphics.getHeight() - screenY)/16)*16);
 
         return false;
     }
