@@ -2,15 +2,23 @@ package com.luis.neoncity.Scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Screens.PlayScreen;
 import com.luis.neoncity.Tools.City;
+//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 /**
  * Created by Luis and Jacob on 5/9/2017.
@@ -43,17 +52,49 @@ public class Hud implements InputProcessor{
 
         cursor = new Image(new Texture("cursor.png"));
 
+        ButtonGroup<TextButton> group = new ButtonGroup<TextButton>();
+        group.setMaxCheckCount(1);
+        int count = 1;
+
+        /*ImageButton button = new ImageButton(new Image("bulldozer.png"));
+        button.setSize(50,50);
+        stage.addActor(button);
+        button.setPosition(50,200);*/
         for(int r = 1; r <= 8; r++)
         {
             for(int c = 1; c <= 2; c++)
             {
-                TextButton button = new TextButton(""+c*r,skin,"default");
+
+
+                TextButton button = new TextButton("",skin,"default");
                 button.setSize(50,50);
+                button.setColor(Color.DARK_GRAY);
                 stage.addActor(button);
+                group.add(button);
                 button.setPosition(c*50,r*50+150);
+
+                button.getStyle().up = ;
+
+                CheckBox box = new CheckBox("",skin);
+                box.setSize(50,50);
+                box.setPosition(c*50,r*50+150);
+
+                stage.addActor(box);
+                group.add(box);
+
+
 
             }
         }
+        group.uncheckAll();
+        for(TextButton b : group.getButtons())
+        {
+            if(b.isPressed())
+                b.toggle();
+            if(b.isChecked())
+                b.setColor(Color.RED);
+        }
+
 
         Table table = new Table();
         table.top();
