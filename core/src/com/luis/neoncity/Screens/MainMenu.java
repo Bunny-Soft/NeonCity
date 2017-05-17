@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Tools.City;
+import com.luis.neoncity.Tools.TextInput;
 
 /**
  * Created by jz367071 on 5/12/2017.
@@ -25,6 +26,7 @@ public class MainMenu implements Screen {
     SpriteBatch sb;
     NeonCity game;
     Skin skin;
+    TextInput cityName;
     public MainMenu(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
@@ -48,14 +50,22 @@ public class MainMenu implements Screen {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 sb.end();
-                game.setScreen(new PlayScreen(game, sb, new City("Dallas")));
+
+                game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput())));
             }
         });
 
 
-        TextButton load = new TextButton("Load Game", skin, "default");
+        TextButton load = new TextButton("Change City Name", skin, "default");
         load.setSize(300, 100);
         load.setPosition(900, 440);
+        load.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                cityName = new TextInput();
+                Gdx.input.getTextInput(cityName, "Change Name", "Dallas", "City");
+            }
+        });
 
         TextButton options = new TextButton("Options", skin, "default");
         options.setSize(300, 100);
