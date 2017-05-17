@@ -12,12 +12,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.luis.neoncity.Buildings.Building;
-import com.luis.neoncity.Buildings.ResidentialBuilding;
 import com.luis.neoncity.Input.TiledMapStage;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Scenes.Hud;
 import com.luis.neoncity.Tools.City;
+import com.luis.neoncity.Tools.TileAndSpriteRenderer;
 
 /**
  * Created by Luis on 5/9/2017.
@@ -50,7 +49,9 @@ public class PlayScreen implements Screen {
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("TestMap.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new TileAndSpriteRenderer(map, city);
+        //the stage does not render the tile map, must render sprites with custum render, this renderer does not render the stage
+        //
         gameCam.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
 
         stage = new TiledMapStage(gamePort, map, city);
@@ -82,6 +83,7 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
         //for(ResidentialBuilding b : city.getBuildings())
         //b.draw(spriteBatch);
+        //stage.draw();
     }
 
     @Override

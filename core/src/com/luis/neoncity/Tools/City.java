@@ -1,6 +1,5 @@
 package com.luis.neoncity.Tools;
 
-import com.luis.neoncity.Buildings.Building;
 import com.luis.neoncity.Buildings.ResidentialBuilding;
 
 import java.util.ArrayList;
