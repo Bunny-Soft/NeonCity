@@ -48,9 +48,9 @@ public class PlayScreen implements Screen {
         hud = new Hud(sb, city);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("TestMap.tmx");
+        map = mapLoader.load("islandTest.tmx");
         renderer = new TileAndSpriteRenderer(map, city);
-        //the stage does not render the tile map, must render sprites with custum render, this renderer does not render the stage
+        //the stage does not render the tile map, must render sprites with custom render, this renderer does not render the stage
         //
         gameCam.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
 
@@ -81,9 +81,6 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-        //for(ResidentialBuilding b : city.getBuildings())
-        //b.draw(spriteBatch);
-        //stage.draw();
     }
 
     @Override

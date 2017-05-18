@@ -63,7 +63,7 @@ public class MainMenu implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 cityName = new TextInput();
-                Gdx.input.getTextInput(cityName, "Change Name", "Dallas", "City");
+                Gdx.input.getTextInput(cityName, "", "Dallas", "");
             }
         });
 
@@ -119,6 +119,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }
