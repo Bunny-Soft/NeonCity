@@ -11,14 +11,13 @@ import com.luis.neoncity.Tools.City;
 
 public class ResidentialBuilding extends Building { //implements Building{
     protected int populationAdded;
-    public Image sprite;
 
     public ResidentialBuilding(Vector3 loc, City contains, Boolean inUse){
-        super.location = loc;
-        super.contains = contains;
-        super.inUse = inUse;
+        super(loc, contains, inUse);
+
         sprite = new Image(new Texture("res.png"));
         sprite.setPosition(loc.x, loc.y);
+
         populationNeeded = (int)(Math.random()*3+1); //random requirement of residents
         pollutionCreated = 1; //specific pollution to building type
         populationAdded = (int) Math.ceil(populationNeeded * contains.getHappiness()); //The amount of people born or moving in is affected by city happiness

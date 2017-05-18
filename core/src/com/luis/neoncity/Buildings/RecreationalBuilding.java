@@ -12,15 +12,13 @@ import com.luis.neoncity.Tools.City;
 
 public class RecreationalBuilding extends Building { //implements Building{
     protected int happinessAdded;
-    protected Image sprite;
-    Batch batch;
 
     public RecreationalBuilding(Vector3 loc, City contains, Boolean inUse){
-        super.location = loc;
-        super.contains = contains;
-        super.inUse = inUse;
-        sprite = new Image(new Texture("res.png"));
+        super(loc, contains, inUse);
+
+        sprite = new Image(new Texture("com.png"));
         sprite.setPosition(loc.x, loc.y);
+
         populationNeeded = 1; //one person maintains the park
         pollutionCreated = -3; //specific pollution to building type
         happinessAdded = (int) Math.ceil(populationNeeded * contains.getHappiness() * 3); //The amount of people using the park is affected by city happiness
@@ -32,9 +30,5 @@ public class RecreationalBuilding extends Building { //implements Building{
     {
         if(inUse)
             contains.setHappiness(contains.getHappiness() + happinessAdded);
-    }
-
-    public void draw(Batch batch){
-        super.draw(batch);
     }
 }

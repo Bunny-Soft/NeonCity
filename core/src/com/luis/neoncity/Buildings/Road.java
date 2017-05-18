@@ -6,16 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.luis.neoncity.Tools.City;
 
 /**
- * Created by Zach on 5/16/17.
+ * Created by Luis on 5/18/17.
  */
 
-public class IndustrialBuilding extends Building { //implements Building{
+public class Road extends Building { //implements Building{
     protected int fundsAdded;
 
-    public IndustrialBuilding(Vector3 loc, City contains, Boolean inUse){
+    public Road(Vector3 loc, City contains, Boolean inUse){
         super(loc, contains, inUse);
 
-        sprite = new Image(new Texture("res.png"));
+        sprite = new Image(new Texture("road.png"));
         sprite.setPosition(loc.x, loc.y);
 
         populationNeeded = (int)(Math.random()*4+3); //random requirement of workers
