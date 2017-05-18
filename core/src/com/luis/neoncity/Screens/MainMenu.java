@@ -21,12 +21,12 @@ import com.luis.neoncity.Tools.TextInput;
 
 public class MainMenu implements Screen {
     private Stage stage;
-    Image sprite;
-    Image title;
-    SpriteBatch sb;
-    NeonCity game;
-    Skin skin;
-    TextInput cityName;
+    protected Image sprite;
+    private Image title;
+    private SpriteBatch sb;
+    private NeonCity game;
+    protected Skin skin;
+    private TextInput cityName;
     public MainMenu(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
@@ -51,21 +51,15 @@ public class MainMenu implements Screen {
             public void changed (ChangeEvent event, Actor actor) {
                 sb.end();
 
-                game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput())));
+                game.setScreen(new CityCreator(game, sb));
             }
         });
 
 
-        TextButton load = new TextButton("Change City Name", skin, "default");
+        TextButton load = new TextButton("Load", skin, "default");
         load.setSize(300, 100);
         load.setPosition(900, 440);
-        load.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                cityName = new TextInput();
-                Gdx.input.getTextInput(cityName, "", "Dallas", "");
-            }
-        });
+
 
         TextButton options = new TextButton("Options", skin, "default");
         options.setSize(300, 100);

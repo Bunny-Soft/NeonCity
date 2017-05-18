@@ -18,10 +18,10 @@ public class City {
 
     public ArrayList<Building> buildings;
 
-    public City(String cityName){
+    public City(String cityName, Integer funds){
         this.cityName = cityName;
 
-        this.funds = 2000000;
+        this.funds = funds;
         this.population = 5;
         pollution = 0;
         happiness = 100.00;
