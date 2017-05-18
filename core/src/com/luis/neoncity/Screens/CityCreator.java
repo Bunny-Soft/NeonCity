@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -16,18 +17,18 @@ import com.luis.neoncity.Tools.City;
 import com.luis.neoncity.Tools.TextInput;
 
 /**
- * Created by jz367071 on 5/12/2017.
+ * Created by jz367071 on 5/18/2017.
  */
 
-public class MainMenu implements Screen {
+public class CityCreator implements Screen {
     private Stage stage;
-    protected Image sprite;
-    private Image title;
-    private SpriteBatch sb;
-    private NeonCity game;
+    protected SpriteBatch sb;
+    private Image back;
+    private Image options;
+    protected NeonCity game;
     protected Skin skin;
     private TextInput cityName;
-    public MainMenu(NeonCity g, SpriteBatch s) {
+    public CityCreator(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
         sb.begin();
@@ -43,41 +44,60 @@ public class MainMenu implements Screen {
             skin = new Skin();
         }
 
-        TextButton start = new TextButton("New Game", skin, "default");
+        TextButton start = new TextButton("Difficulty", skin, "default");
         start.setSize(300, 100);
-        start.setPosition(900, 550);
+        start.setPosition(120, 550);
         start.addListener(new ChangeListener() {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
-                sb.end();
 
-                game.setScreen(new CityCreator(game, sb));
             }
         });
 
 
-        TextButton load = new TextButton("Load", skin, "default");
+        TextButton load = new TextButton("Create City Name", skin, "default");
         load.setSize(300, 100);
-        load.setPosition(900, 440);
+        load.setPosition(120, 440);
+        load.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                cityName = new TextInput();
+                Gdx.input.getTextInput(cityName, "", "Dallas", "");
+            }
+        });
 
+        TextButton exit = new TextButton("Continue", skin, "default");
+        exit.setSize(300, 100);
+        exit.setPosition(120, 330);
+        exit.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                sb.end();
 
-        TextButton options = new TextButton("Options", skin, "default");
-        options.setSize(300, 100);
-        options.setPosition(900, 330);
+                try {
+                    game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput())));
+                }
+                catch(Exception e)
+                {
+                    Label error = new Label("", skin);
+                    error.setText("Set a City Name before starting the game.");
+                    error.setPosition(60, 30);
+                    stage.addActor(error);
+                    sb.begin();
+                }
+            }
+        });
 
-        //sprite is the background image for the title
-        sprite = new Image(new Texture("8bitCity.png"));
-        sprite.setSize(1366, 768);
+        back = new Image(new Texture("black.png"));
+        back.setSize(1366, 768);
+        options = new Image(new Texture("GameOptions.png"));
+        options.setPosition(80, 660);
 
-        title = new Image(new Texture("menu.png"));
-        title.setPosition(30, 550);
-
-        //adding image and button to display in order
-        stage.addActor(sprite);
-        stage.addActor(title);
+        stage.addActor(back);
+        stage.addActor(options);
         stage.addActor(start);
         stage.addActor(load);
-        stage.addActor(options);
+        stage.addActor(exit);
     }
 
     @Override
