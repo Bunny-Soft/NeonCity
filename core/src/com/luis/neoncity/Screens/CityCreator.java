@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -15,6 +16,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Tools.City;
 import com.luis.neoncity.Tools.TextInput;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by jz367071 on 5/18/2017.
@@ -28,6 +31,8 @@ public class CityCreator implements Screen {
     protected NeonCity game;
     protected Skin skin;
     private TextInput cityName;
+    private SelectBox cityDifficulty;
+    private Integer cityFunds;
     public CityCreator(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
@@ -44,15 +49,24 @@ public class CityCreator implements Screen {
             skin = new Skin();
         }
 
-        TextButton start = new TextButton("Difficulty", skin, "default");
-        start.setSize(300, 100);
-        start.setPosition(120, 550);
-        start.addListener(new ChangeListener() {
-            @Override
-            public void changed (ChangeEvent event, Actor actor) {
+       // TextButton start = new TextButton("Difficulty", skin, "default");
+       // start.setSize(300, 100);
+       // start.setPosition(120, 550);
+       // start.addListener(new ChangeListener() {
+        //    @Override
+       //     public void changed (ChangeEvent event, Actor actor) {
+                cityDifficulty = new SelectBox(skin);
+                cityDifficulty.setName("Difficulty");
+                cityDifficulty.setSize(300, 100);
+                cityDifficulty.setPosition(120, 550);
+                String[] items = new String[3];
+                items[0] = "Easy";
+                items[1] = "Medium";
+                items[2] = "Hard";
+                cityDifficulty.setItems(items);
 
-            }
-        });
+         //   }
+       // });
 
 
         TextButton load = new TextButton("Create City Name", skin, "default");
@@ -75,12 +89,32 @@ public class CityCreator implements Screen {
                 sb.end();
 
                 try {
-                    game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput())));
+
+                if(cityDifficulty.getSelected().equals("Easy"))
+                    cityFunds = 200000;
+                else if(cityDifficulty.getSelected().equals("Medium"))
+                    cityFunds = 20000;
+                else if(cityDifficulty.getSelected().equals("Hard"))
+                    cityFunds = 2000;
+                else
+                    cityFunds = 0;
                 }
                 catch(Exception e)
                 {
                     Label error = new Label("", skin);
-                    error.setText("Set a City Name before starting the game.");
+                    error.setText("Set a City Name AND Difficulty before starting the game.");
+                    error.setPosition(60, 30);
+                    stage.addActor(error);
+                    sb.begin();
+                }
+
+                try {
+                    game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds )));
+                }
+                catch(Exception e)
+                {
+                    Label error = new Label("", skin);
+                    error.setText("Set a City Name AND Difficulty before starting the game.");
                     error.setPosition(60, 30);
                     stage.addActor(error);
                     sb.begin();
@@ -95,7 +129,8 @@ public class CityCreator implements Screen {
 
         stage.addActor(back);
         stage.addActor(options);
-        stage.addActor(start);
+        stage.addActor(cityDifficulty);
+        //stage.addActor(start);
         stage.addActor(load);
         stage.addActor(exit);
     }
