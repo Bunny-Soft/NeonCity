@@ -2,6 +2,7 @@ package com.luis.neoncity.Tools;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.luis.neoncity.Buildings.Building;
 import com.luis.neoncity.Buildings.ResidentialBuilding;
 
 /**
@@ -20,7 +21,7 @@ public class TileAndSpriteRenderer extends OrthogonalTiledMapRenderer {
         super.render();
 
         this.getBatch().begin();
-        for(ResidentialBuilding b : city.getBuildings())
+        for(Building b : city.getBuildings())
             b.sprite.draw(this.getBatch(), 1f);
 
         this.getBatch().end();

@@ -6,7 +6,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.luis.neoncity.Buildings.Building;
+import com.luis.neoncity.Buildings.IndustrialBuilding;
+import com.luis.neoncity.Buildings.RecreationalBuilding;
 import com.luis.neoncity.Buildings.ResidentialBuilding;
+import com.luis.neoncity.Buildings.Road;
+import com.luis.neoncity.Scenes.Hud;
 import com.luis.neoncity.Tools.City;
 
 /**
@@ -18,11 +23,13 @@ public class TiledMapStage extends Stage implements InputProcessor{
     private Vector3 lastTouch;
     private Stage stage;
     City city;
+    Hud hud;
 
-    public TiledMapStage(Viewport viewport, TiledMap tiledMap, City city) {
+    public TiledMapStage(Viewport viewport, TiledMap tiledMap, City city, Hud hud) {
         super(viewport);
         this.tiledMap = tiledMap;
         this.city = city;
+        this.hud = hud;
 
         lastTouch = new Vector3();
         stage = this;
@@ -34,7 +41,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 
     private void moveCamera( int screenX, int screenY ) {
         Vector3 newPosition = getNewCameraPosition(screenX, screenY);
-        if(!cameraOutOfLimit( new Vector3(stage.getCamera().position.add(newPosition))))
+        //if(!cameraOutOfLimit( new Vector3(stage.getCamera().position.add(newPosition))))
             stage.getCamera().translate(newPosition);
         lastTouch.set(screenX, screenY, 0);
     }
@@ -65,7 +72,17 @@ public class TiledMapStage extends Stage implements InputProcessor{
         Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
         System.out.println((int)(test.x / 16) +  ", " + (int)(test.y /16));
         Vector3 pos = new Vector3((int)(test.x / 16)* 16 ,  (int)(test.y /16) * 16, 0);
-        ResidentialBuilding res = new ResidentialBuilding(pos, city, true);
+        Building res;
+        if(hud.currentState == Hud.State.ROAD)
+            res = new Road(pos, city, true);
+        else if (hud.currentState == Hud.State.RESIDENTIAL)
+            res = new ResidentialBuilding(pos, city, true);
+        else if (hud.currentState == Hud.State.COMMERCIAL)
+            res = new RecreationalBuilding(pos, city, true);
+        else if (hud.currentState == Hud.State.INDUSTRIAL)
+            res = new IndustrialBuilding(pos, city, true);
+        else
+            res = new Road(pos, city, true);
         city.getBuildings().add(res);
 
         System.out.print("added building");

@@ -1,5 +1,6 @@
 package com.luis.neoncity.Tools;
 
+import com.luis.neoncity.Buildings.Building;
 import com.luis.neoncity.Buildings.ResidentialBuilding;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class City {
     private Integer pollution;
     private Double happiness;
 
-    public ArrayList<ResidentialBuilding> buildings;
+    public ArrayList<Building> buildings;
 
     public City(String cityName){
         this.cityName = cityName;
@@ -24,7 +25,7 @@ public class City {
         this.population = 5;
         pollution = 0;
         happiness = 100.00;
-        buildings = new ArrayList<ResidentialBuilding>();
+        buildings = new ArrayList<Building>();
     }
     public String getCityName() {
         return cityName;
@@ -70,11 +71,11 @@ public class City {
         this.happiness = happiness;
     }
 
-    public ArrayList<ResidentialBuilding> getBuildings() {
+    public ArrayList<Building> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(ArrayList<ResidentialBuilding> buildings) {
+    public void setBuildings(ArrayList<Building> buildings) {
         this.buildings = buildings;
     }
     //buildings are initialized with Building(Vector2 location, this, Boolean IfBuildingIsInUse);

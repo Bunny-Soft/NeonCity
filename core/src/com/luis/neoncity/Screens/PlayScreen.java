@@ -54,7 +54,7 @@ public class PlayScreen implements Screen {
         //
         gameCam.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
 
-        stage = new TiledMapStage(gamePort, map, city);
+        stage = new TiledMapStage(gamePort, map, city, hud);
 
         InputMultiplexer im = new InputMultiplexer(hud.stage, stage,hud );
         Gdx.input.setInputProcessor(im);
