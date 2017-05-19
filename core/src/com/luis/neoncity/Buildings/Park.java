@@ -13,6 +13,7 @@ public class Park extends Building { //implements Building{
     protected int fundsAdded;
 
     public Park(Vector3 loc, City contains, Boolean inUse){
+        super(loc, contains, inUse, 1);
 
         sprite = new Image(new Texture("park.png"));
         sprite.setPosition(loc.x, loc.y);
