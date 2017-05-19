@@ -16,17 +16,20 @@ public class Building extends Actor {
     City contains;
     Boolean inUse;
     int populationNeeded, pollutionCreated;
+
     public Image sprite;
+    public int size;
 
     public Building()
     {
     }
 
-    public Building(Vector3 loc, City contains, boolean inUse)
+    public Building(Vector3 loc, City contains, boolean inUse, int size)
     {
         location = loc;
         this.contains = contains;
         this.inUse = inUse;
+        this.size = size;
     }
 
     public Vector3 getLocation()

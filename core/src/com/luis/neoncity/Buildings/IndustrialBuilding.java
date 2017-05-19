@@ -13,9 +13,9 @@ public class IndustrialBuilding extends Building { //implements Building{
     protected int fundsAdded;
 
     public IndustrialBuilding(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse);
+        super(loc, contains, inUse, 3);
 
-        sprite = new Image(new Texture("res.png"));
+        sprite = new Image(new Texture("ind.png"));
         sprite.setPosition(loc.x, loc.y);
 
         populationNeeded = (int)(Math.random()*4+3); //random requirement of workers
