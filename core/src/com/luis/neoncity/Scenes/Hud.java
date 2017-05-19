@@ -61,6 +61,7 @@ public class Hud implements InputProcessor{
 
     private Image cursor;
 
+
     private ClickListener listener = new ClickListener();
     public Hud(SpriteBatch sb, City city) {
         this.city = city;
@@ -119,95 +120,72 @@ public class Hud implements InputProcessor{
                 button.setPosition(c*50,r*50+150);
 
                 if(count==1)
-                {
                     button.addListener(new ClickListener(){
                      @Override public void clicked(InputEvent event, float x, float y) {
-                       currentState = State.BULLDOZER;
-                     }
+                       currentState = State.BULLDOZER;}
                     });
-                }
+
                 if(count==2)
-                {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.ROAD;
-                        }
-                    });
-                }
+                            currentState = State.ROAD;}});
+
                 if(count==3)
-                {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.RAIL;
-                        }
+                            currentState = State.RAIL;}
                     });
-                }
                 if(count==4)
-                {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.POWER;
-                        }
-                    });
-                }
+                            currentState = State.POWER;}});
+
                 if(count==5)
-                {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.PARK;
-                        }
-                    });
-                }
+                            currentState = State.PARK;}});
+
                 if(count==6)
-                {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.RESIDENTIAL;
-                        }
-                    });
-                }
+                            currentState = State.RESIDENTIAL;}});
+
                 if(count==7)
-                {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.COMMERCIAL;
                         }
                     });
-                }
-                if(count==8)
-                {
+
+                if(count==8) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.INDUSTRIAL;
                         }
                     });
                 }
-                if(count==9)
-                {
+                if(count==9) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.FIRE;
                         }
                     });
                 }
-                if(count==10)
-                {
+                if(count==10) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.POLICE;
                         }
                     });
                 }
-                if(count==11)
-                {
+                if(count==11) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.STADIUM;
                         }
                     });
                 }
-                if(count==12)
-                {
+                if(count==12) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.SEAPORT;
@@ -215,31 +193,26 @@ public class Hud implements InputProcessor{
                     });
                 }
                 if(count==13)
-                {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.COAL;
-                        }
+                            currentState = State.COAL;}
                     });
-                }
-                if(count==14)
-                {
+
+                if(count==14) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.NUCLEAR;
                         }
                     });
                 }
-                if(count==15)
-                {
+                if(count==15) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.AIRPORT;
                         }
                     });
                 }
-                if(count==16)
-                {
+                if(count==16) {
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.DRAG;

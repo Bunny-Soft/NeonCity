@@ -13,7 +13,7 @@ public class ResidentialBuilding extends Building { //implements Building{
     protected int populationAdded;
 
     public ResidentialBuilding(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse);
+        super(loc, contains, inUse, 3);
 
         sprite = new Image(new Texture("res.png"));
         sprite.setPosition(loc.x, loc.y);

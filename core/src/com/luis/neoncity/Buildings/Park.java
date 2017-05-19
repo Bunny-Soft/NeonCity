@@ -9,13 +9,12 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
-public class Road extends Building { //implements Building{
+public class Park extends Building { //implements Building{
     protected int fundsAdded;
 
-    public Road(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 1);
+    public Park(Vector3 loc, City contains, Boolean inUse){
 
-        sprite = new Image(new Texture("road.png"));
+        sprite = new Image(new Texture("park.png"));
         sprite.setPosition(loc.x, loc.y);
 
         populationNeeded = (int)(Math.random()*4+3); //random requirement of workers

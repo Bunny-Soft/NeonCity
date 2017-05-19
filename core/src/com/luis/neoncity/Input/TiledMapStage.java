@@ -6,11 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.luis.neoncity.Buildings.Building;
-import com.luis.neoncity.Buildings.IndustrialBuilding;
-import com.luis.neoncity.Buildings.RecreationalBuilding;
-import com.luis.neoncity.Buildings.ResidentialBuilding;
-import com.luis.neoncity.Buildings.Road;
+import com.luis.neoncity.Buildings.*;
 import com.luis.neoncity.Scenes.Hud;
 import com.luis.neoncity.Tools.City;
 
@@ -73,14 +69,35 @@ public class TiledMapStage extends Stage implements InputProcessor{
         System.out.println((int)(test.x / 16) +  ", " + (int)(test.y /16));
         Vector3 pos = new Vector3((int)(test.x / 16)* 16 ,  (int)(test.y /16) * 16, 0);
         Building res;
+
         if(hud.currentState == Hud.State.ROAD)
             res = new Road(pos, city, true);
+        else if (hud.currentState == Hud.State.RAIL)
+            res = new Rail(pos, city, true);
+        else if (hud.currentState == Hud.State.POWER)
+            res = new PowerLine(pos, city, true);
+        else if (hud.currentState == Hud.State.PARK)
+            res = new Park(pos, city, true);
         else if (hud.currentState == Hud.State.RESIDENTIAL)
             res = new ResidentialBuilding(pos, city, true);
         else if (hud.currentState == Hud.State.COMMERCIAL)
             res = new RecreationalBuilding(pos, city, true);
         else if (hud.currentState == Hud.State.INDUSTRIAL)
             res = new IndustrialBuilding(pos, city, true);
+        else if (hud.currentState == Hud.State.FIRE)
+            res = new Fire(pos, city, true);
+        else if (hud.currentState == Hud.State.POLICE)
+            res = new Police(pos, city, true);
+        else if (hud.currentState == Hud.State.STADIUM)
+            res = new Stadium(pos, city, true);
+        else if (hud.currentState == Hud.State.SEAPORT)
+            res = new Seaport(pos, city, true);
+        else if (hud.currentState == Hud.State.COAL)
+            res = new Coal(pos, city, true);
+        else if (hud.currentState == Hud.State.NUCLEAR)
+            res = new Nuclear(pos, city, true);
+        else if (hud.currentState == Hud.State.AIRPORT)
+            res = new Airport(pos, city, true);
         else
             res = new Road(pos, city, true);
         city.getBuildings().add(res);
