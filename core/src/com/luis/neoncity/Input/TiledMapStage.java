@@ -3,12 +3,14 @@ package com.luis.neoncity.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.luis.neoncity.Buildings.*;
 import com.luis.neoncity.Scenes.Hud;
 import com.luis.neoncity.Tools.City;
+import com.luis.neoncity.Tools.Tile;
 
 /**
  * Created by Luis on 5/11/2017.
@@ -20,6 +22,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
     private Stage stage;
     City city;
     Hud hud;
+    Tile[][] tiles;
 
     public TiledMapStage(Viewport viewport, TiledMap tiledMap, City city, Hud hud) {
         super(viewport);
@@ -29,9 +32,18 @@ public class TiledMapStage extends Stage implements InputProcessor{
 
         lastTouch = new Vector3();
         stage = this;
+        tiles = new Tile[256][256];
 
         for (MapLayer layer : tiledMap.getLayers()) {
-            //TODO assign each tile an object stored in a 2d array with information on its content(buildings and such)
+            TiledMapTileLayer tiledLayer = (TiledMapTileLayer) layer;
+            for (int x = 0; x < tiledLayer.getWidth(); x++) {
+                for (int y = 0; y < tiledLayer.getHeight(); y++) {
+                    TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);
+                    //System.out.print(cell.getTile().getProperties().getKeys());
+                    //Tile[x][y] = new Tile();
+                    //TODO assign each tile an object stored in a 2d array with information on its content(buildings and such)
+                }
+            }
         }
     }
 
