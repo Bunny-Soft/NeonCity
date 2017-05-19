@@ -66,42 +66,48 @@ public class TiledMapStage extends Stage implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         lastTouch.set(screenX, screenY, 0);
         Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
-        System.out.println((int)(test.x / 16) +  ", " + (int)(test.y /16));
-        Vector3 pos = new Vector3((int)(test.x / 16)* 16 ,  (int)(test.y /16) * 16, 0);
+        System.out.println((int) (test.x / 16) + ", " + (int) (test.y / 16));
+        Vector3 pos = new Vector3((int) (test.x / 16) * 16, (int) (test.y / 16) * 16, 0);
         Building res;
+        if (hud.currentState != Hud.State.DRAG){
+            if ((hud.currentState == Hud.State.ROAD)&&(city.getFunds()>=10)) {
+                res = new Road(pos, city, true);
+                city.setFunds(city.getFunds()-res.cost);
+            }
+            else if (hud.currentState == Hud.State.RAIL)
+                res = new Rail(pos, city, true);
+            else if (hud.currentState == Hud.State.POWER)
+                res = new PowerLine(pos, city, true);
+            else if (hud.currentState == Hud.State.PARK)
+                res = new Park(pos, city, true);
+            else if (hud.currentState == Hud.State.RESIDENTIAL)
+                res = new ResidentialBuilding(pos, city, true);
+            else if (hud.currentState == Hud.State.COMMERCIAL)
+                res = new RecreationalBuilding(pos, city, true);
+            else if (hud.currentState == Hud.State.INDUSTRIAL)
+                res = new IndustrialBuilding(pos, city, true);
+            else if (hud.currentState == Hud.State.FIRE)
+                res = new Fire(pos, city, true);
+            else if (hud.currentState == Hud.State.POLICE)
+                res = new Police(pos, city, true);
+            else if (hud.currentState == Hud.State.STADIUM)
+                res = new Stadium(pos, city, true);
+            else if (hud.currentState == Hud.State.SEAPORT)
+                res = new Seaport(pos, city, true);
+            else if (hud.currentState == Hud.State.COAL)
+                res = new Coal(pos, city, true);
+            else if (hud.currentState == Hud.State.NUCLEAR)
+                res = new Nuclear(pos, city, true);
+            else if (hud.currentState == Hud.State.AIRPORT)
+                res = new Airport(pos, city, true);
+            else
+                res = new Road(pos, city, true);
+        if(city.getFunds() >= res.cost) {
+            city.getBuildings().add(res);
+            city.setFunds(city.getFunds() - res.cost);
+        }
 
-        if(hud.currentState == Hud.State.ROAD)
-            res = new Road(pos, city, true);
-        else if (hud.currentState == Hud.State.RAIL)
-            res = new Rail(pos, city, true);
-        else if (hud.currentState == Hud.State.POWER)
-            res = new PowerLine(pos, city, true);
-        else if (hud.currentState == Hud.State.PARK)
-            res = new Park(pos, city, true);
-        else if (hud.currentState == Hud.State.RESIDENTIAL)
-            res = new ResidentialBuilding(pos, city, true);
-        else if (hud.currentState == Hud.State.COMMERCIAL)
-            res = new RecreationalBuilding(pos, city, true);
-        else if (hud.currentState == Hud.State.INDUSTRIAL)
-            res = new IndustrialBuilding(pos, city, true);
-        else if (hud.currentState == Hud.State.FIRE)
-            res = new Fire(pos, city, true);
-        else if (hud.currentState == Hud.State.POLICE)
-            res = new Police(pos, city, true);
-        else if (hud.currentState == Hud.State.STADIUM)
-            res = new Stadium(pos, city, true);
-        else if (hud.currentState == Hud.State.SEAPORT)
-            res = new Seaport(pos, city, true);
-        else if (hud.currentState == Hud.State.COAL)
-            res = new Coal(pos, city, true);
-        else if (hud.currentState == Hud.State.NUCLEAR)
-            res = new Nuclear(pos, city, true);
-        else if (hud.currentState == Hud.State.AIRPORT)
-            res = new Airport(pos, city, true);
-        else
-            res = new Road(pos, city, true);
-        city.getBuildings().add(res);
-
+    }
         System.out.print("added building");
 
         return super.touchDown(screenX, screenY, pointer, button);
@@ -110,6 +116,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         moveCamera(screenX, screenY);
+
         return false;
     }
 }

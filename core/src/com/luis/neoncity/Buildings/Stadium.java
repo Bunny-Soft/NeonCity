@@ -12,7 +12,7 @@ import com.luis.neoncity.Tools.City;
 public class Stadium extends Building {
 
     public Stadium(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 4);
+        super(loc, contains, inUse, 4, 3000);
 
         sprite = new Image(new Texture("stadium.png"));
         sprite.setPosition(loc.x, loc.y);

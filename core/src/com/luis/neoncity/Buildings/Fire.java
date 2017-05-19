@@ -12,7 +12,7 @@ import com.luis.neoncity.Tools.City;
 public class Fire extends Building {
 
     public Fire(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 3);
+        super(loc, contains, inUse, 3, 500);
 
         sprite = new Image(new Texture("fire.png"));
         sprite.setPosition(loc.x, loc.y);

@@ -13,7 +13,7 @@ public class IndustrialBuilding extends Building { //implements Building{
     protected int fundsAdded;
 
     public IndustrialBuilding(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 3);
+        super(loc, contains, inUse, 3, 100);
 
         sprite = new Image(new Texture("ind.png"));
         sprite.setPosition(loc.x, loc.y);
