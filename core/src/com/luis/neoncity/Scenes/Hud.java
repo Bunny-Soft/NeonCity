@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -48,6 +50,9 @@ public class Hud implements InputProcessor{
         COAL,       NUCLEAR,
         AIRPORT,    DRAG};
     public State currentState;
+
+    private SpriteDrawable icon;
+    private Sprite sprite;
 
     private Viewport viewport;
     public Stage stage;
@@ -113,113 +118,226 @@ public class Hud implements InputProcessor{
             for(int c = 1; c <= 2; c++)
             {
                 count++;
-                TextButton button = new TextButton(""+count,skin,"default");
+                ImageButton button = new ImageButton(new SpriteDrawable(new Sprite(new Texture("ui.png"))));
+
+
+                if(count==1) {
+                    sprite = new Sprite(new Texture("bulldozer.png"));
+                    sprite.setSize(48,48);
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.BULLDOZER;
+                            cursor = new Image(sprite.getTexture());
+
+                        }
+                    });
+
+                }
+                if(count==2) {
+                    sprite = new Sprite(new Texture("road.png"));
+                    sprite.setSize(48,48);
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.ROAD;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+
+                if(count==3) {
+                    sprite = new Sprite(new Texture("road.png"));
+                    sprite.setSize(48,48);
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.RAIL;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+
+                if(count==4) {
+                    sprite = new Sprite(new Texture("road.png"));
+                    sprite.setSize(48,48);
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.POWER;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+
+                if(count==5) {
+                    sprite = new Sprite(new Texture("park.png"));
+                    sprite.setSize(48,48);
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.PARK;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+
+                if(count==6) {
+                    sprite = new Sprite(new Texture("res.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.RESIDENTIAL;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+
+                if(count==7) {
+                    sprite = new Sprite(new Texture("com.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.COMMERCIAL;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+
+                if(count==8) {
+                    sprite = new Sprite(new Texture("ind.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.INDUSTRIAL;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+                if(count==9) {
+                    sprite = new Sprite(new Texture("fire.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.FIRE;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+                if(count==10) {
+                    sprite = new Sprite(new Texture("police.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.POLICE;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+                if(count==11) {
+                    sprite = new Sprite(new Texture("stadium.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.STADIUM;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+                if(count==12) {
+                    sprite = new Sprite(new Texture("seaport.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.SEAPORT;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+                if(count==13) {
+                    sprite = new Sprite(new Texture("coal.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.COAL;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+
+                if(count==14) {
+                    sprite = new Sprite(new Texture("nuclear.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.NUCLEAR;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+                if(count==15) {
+                    sprite = new Sprite(new Texture("airport.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.AIRPORT;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
+                if(count==16) {
+                    sprite = new Sprite(new Texture("Cursor.png"));
+                    icon = new SpriteDrawable(sprite);
+                    button = new ImageButton(icon);
+                    button.addListener(new ClickListener(){
+                        @Override public void clicked(InputEvent event, float x, float y) {
+                            currentState = State.DRAG;
+                            cursor = new Image(sprite.getTexture());
+                        }
+                    });
+
+                }
                 button.setSize(50,50);
                 button.setColor(Color.DARK_GRAY);
                 stage.addActor(button);
                 button.setPosition(c*50,r*50+150);
-
-                if(count==1)
-                    button.addListener(new ClickListener(){
-                     @Override public void clicked(InputEvent event, float x, float y) {
-                       currentState = State.BULLDOZER;}
-                    });
-
-                if(count==2)
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.ROAD;}});
-
-                if(count==3)
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.RAIL;}
-                    });
-                if(count==4)
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.POWER;}});
-
-                if(count==5)
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.PARK;}});
-
-                if(count==6)
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.RESIDENTIAL;}});
-
-                if(count==7)
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.COMMERCIAL;
-                        }
-                    });
-
-                if(count==8) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.INDUSTRIAL;
-                        }
-                    });
-                }
-                if(count==9) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.FIRE;
-                        }
-                    });
-                }
-                if(count==10) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.POLICE;
-                        }
-                    });
-                }
-                if(count==11) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.STADIUM;
-                        }
-                    });
-                }
-                if(count==12) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.SEAPORT;
-                        }
-                    });
-                }
-                if(count==13)
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.COAL;}
-                    });
-
-                if(count==14) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.NUCLEAR;
-                        }
-                    });
-                }
-                if(count==15) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.AIRPORT;
-                        }
-                    });
-                }
-                if(count==16) {
-                    button.addListener(new ClickListener(){
-                        @Override public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.DRAG;
-                        }
-                    });
-                }
-
                 // The currentState variable will be checked in TiledMapStage and will
                 // affect the type of building placed
             }

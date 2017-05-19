@@ -37,7 +37,7 @@ public class PlayScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
-    public PlayScreen(NeonCity game, SpriteBatch sb, City city) {
+    public PlayScreen(NeonCity game, SpriteBatch sb, City city, String mapName) {
         this.game = game;
         this.city = city;
         spriteBatch = sb;
@@ -48,7 +48,18 @@ public class PlayScreen implements Screen {
         hud = new Hud(sb, city);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("islandTest.tmx");
+
+        if(mapName.equals("islandTest"))
+            map = mapLoader.load("islandTest.tmx");
+        else if(mapName.equals("TestMap"))
+            map = mapLoader.load("TestMap.tmx");
+        else if(mapName.equals("SimpleTest"))
+            map = mapLoader.load("SimpleTest.tmx");
+        else
+            map = mapLoader.load("SimpleTest.tmx");
+
+
+
         renderer = new TileAndSpriteRenderer(map, city);
         //the stage does not render the tile map, must render sprites with custom render, this renderer does not render the stage
         //

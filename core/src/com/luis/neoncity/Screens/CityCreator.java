@@ -3,15 +3,18 @@ package com.luis.neoncity.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Tools.City;
@@ -33,6 +36,7 @@ public class CityCreator implements Screen {
     private TextInput cityName;
     private SelectBox cityDifficulty;
     private Integer cityFunds;
+    private String mapName;
     public CityCreator(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
@@ -70,7 +74,7 @@ public class CityCreator implements Screen {
 
 
         TextButton load = new TextButton("Create City Name", skin, "default");
-        load.setSize(300, 100);
+        load.setSize(400, 100);
         load.setPosition(120, 440);
         load.addListener(new ChangeListener() {
             @Override
@@ -80,8 +84,44 @@ public class CityCreator implements Screen {
             }
         });
 
+        Sprite map1 = new Sprite(new Texture("seaport.png"));
+        map1.setSize(400,200);
+        ImageButton mapButton1 = new ImageButton(new SpriteDrawable(map1));
+        mapButton1.setSize(400,200);
+        mapButton1.setPosition(680, 450);
+        mapButton1.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                mapName = "islandTest";
+            }
+        });
+
+        Sprite map2 = new Sprite(new Texture("stadium.png"));
+        map2.setSize(400,200);
+        ImageButton mapButton2 = new ImageButton(new SpriteDrawable(map2));
+        mapButton2.setSize(400,200);
+        mapButton2.setPosition(680, 240);
+        mapButton2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                mapName = "TestMap";
+            }
+        });
+
+        Sprite map3 = new Sprite(new Texture("nuclear.png"));
+        map3.setSize(400,200);
+        ImageButton mapButton3 = new ImageButton(new SpriteDrawable(map3));
+        mapButton3.setSize(400,200);
+        mapButton3.setPosition(680, 30);
+        mapButton3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                mapName = "SimpleTest";
+            }
+        });
+
         TextButton exit = new TextButton("Continue", skin, "default");
-        exit.setSize(300, 100);
+        exit.setSize(400, 100);
         exit.setPosition(120, 330);
         exit.addListener(new ChangeListener() {
             @Override
@@ -99,22 +139,26 @@ public class CityCreator implements Screen {
                 else
                     cityFunds = 0;
                 }
+
+
+
                 catch(Exception e)
                 {
                     Label error = new Label("", skin);
-                    error.setText("Set a City Name AND Difficulty before starting the game.");
+                    error.setText("Set a City Name AND Difficulty AND a Map before starting the game.");
                     error.setPosition(60, 30);
                     stage.addActor(error);
                     sb.begin();
                 }
 
                 try {
-                    game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds )));
+                    game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds), mapName));
                 }
                 catch(Exception e)
                 {
                     Label error = new Label("", skin);
                     error.setText("Set a City Name AND Difficulty before starting the game.");
+                    System.out.print(e.toString());
                     error.setPosition(60, 30);
                     stage.addActor(error);
                     sb.begin();
@@ -130,6 +174,9 @@ public class CityCreator implements Screen {
         stage.addActor(back);
         stage.addActor(options);
         stage.addActor(cityDifficulty);
+        stage.addActor(mapButton1);
+        stage.addActor(mapButton2);
+        stage.addActor(mapButton3);
         //stage.addActor(start);
         stage.addActor(load);
         stage.addActor(exit);
