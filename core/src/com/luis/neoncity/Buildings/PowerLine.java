@@ -12,7 +12,7 @@ import com.luis.neoncity.Tools.City;
 public class PowerLine extends Building {
 
     public PowerLine(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 1);
+        super(loc, contains, inUse, 1, 5);
 
         sprite = new Image(new Texture("park.png"));
         sprite.setPosition(loc.x, loc.y);

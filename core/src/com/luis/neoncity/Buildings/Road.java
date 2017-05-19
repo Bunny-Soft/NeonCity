@@ -13,7 +13,7 @@ public class Road extends Building { //implements Building{
     protected int fundsAdded;
 
     public Road(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 1);
+        super(loc, contains, inUse, 1, 10);
 
         sprite = new Image(new Texture("road.png"));
         sprite.setPosition(loc.x, loc.y);

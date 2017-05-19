@@ -19,17 +19,19 @@ public class Building extends Actor {
 
     public Image sprite;
     public int size;
+    public int cost;
 
     public Building()
     {
     }
 
-    public Building(Vector3 loc, City contains, boolean inUse, int size)
+    public Building(Vector3 loc, City contains, boolean inUse, int size, int cost)
     {
         location = loc;
         this.contains = contains;
         this.inUse = inUse;
         this.size = size;
+        this.cost = cost;
     }
 
     public Vector3 getLocation()

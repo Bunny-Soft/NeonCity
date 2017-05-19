@@ -12,7 +12,7 @@ import com.luis.neoncity.Tools.City;
 public class Airport extends Building {
 
     public Airport(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 6);
+        super(loc, contains, inUse, 6, 10000);
 
         sprite = new Image(new Texture("airport.png"));
         sprite.setPosition(loc.x, loc.y);

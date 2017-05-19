@@ -12,7 +12,7 @@ import com.luis.neoncity.Tools.City;
 public class Nuclear extends Building {
 
     public Nuclear(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 4);
+        super(loc, contains, inUse, 4, 5000);
 
         sprite = new Image(new Texture("nuclear.png"));
         sprite.setPosition(loc.x, loc.y);

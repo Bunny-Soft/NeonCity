@@ -12,7 +12,7 @@ import com.luis.neoncity.Tools.City;
 public class Coal extends Building {
 
     public Coal(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 4);
+        super(loc, contains, inUse, 4, 3000);
 
         sprite = new Image(new Texture("coal.png"));
         sprite.setPosition(loc.x, loc.y);

@@ -63,6 +63,7 @@ public class Hud implements InputProcessor{
     private Label fundsLabel;
     private Label popLabel;
     private Label nameLabel;
+    private Label errorLabel;
 
     private Image cursor;
 
@@ -109,10 +110,6 @@ public class Hud implements InputProcessor{
     }
 
     public void sideButtons(){
-
-        ButtonGroup<CheckBox> group = new ButtonGroup<CheckBox>();
-        group.setMaxCheckCount(1);
-
         int count = 0;
         for(int r = 1; r <= 8; r++) {
             for(int c = 1; c <= 2; c++)
@@ -343,6 +340,7 @@ public class Hud implements InputProcessor{
             }
         }
     }
+
     @Override
     public boolean keyDown(int keycode) {
         return false;
@@ -361,6 +359,7 @@ public class Hud implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println(currentState.toString());
+        fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
         return false;
     }
 
