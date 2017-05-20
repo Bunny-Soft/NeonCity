@@ -6,11 +6,14 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.luis.neoncity.Buildings.*;
 import com.luis.neoncity.Scenes.Hud;
 import com.luis.neoncity.Tools.City;
 import com.luis.neoncity.Tools.Tile;
+
+import java.util.Arrays;
 
 /**
  * Created by Luis on 5/11/2017.
@@ -22,8 +25,6 @@ public class TiledMapStage extends Stage implements InputProcessor{
     private Stage stage;
     City city;
     Hud hud;
-    Tile[][] tiles;
-
     public TiledMapStage(Viewport viewport, TiledMap tiledMap, City city, Hud hud) {
         super(viewport);
         this.tiledMap = tiledMap;
@@ -32,16 +33,16 @@ public class TiledMapStage extends Stage implements InputProcessor{
 
         lastTouch = new Vector3();
         stage = this;
-        tiles = new Tile[256][256];
 
         for (MapLayer layer : tiledMap.getLayers()) {
             TiledMapTileLayer tiledLayer = (TiledMapTileLayer) layer;
             for (int x = 0; x < tiledLayer.getWidth(); x++) {
                 for (int y = 0; y < tiledLayer.getHeight(); y++) {
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);
-                    //System.out.print(cell.getTile().getProperties().getKeys());
-                    //Tile[x][y] = new Tile();
-                    //TODO assign each tile an object stored in a 2d array with information on its content(buildings and such)
+                    if (cell.getTile().getProperties().containsKey("water"))
+                        city.tiles[x][y] = new Tile(false);
+                    else
+                        city.tiles[x][y] = new Tile(true);
                 }
             }
         }
@@ -78,9 +79,10 @@ public class TiledMapStage extends Stage implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         lastTouch.set(screenX, screenY, 0);
         Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
-        System.out.println((int) (test.x / 16) + ", " + (int) (test.y / 16));
-        Vector3 pos = new Vector3((int) (test.x / 16) * 16, (int) (test.y / 16) * 16, 0);
-        Building res;
+        System.out.println("(" + (int) (test.x / 16) + ", " + (int) (test.y / 16) + ")");
+        Vector3 pos = new Vector3((int)test.x / 16 * 16, (int) (test.y / 16) * 16, 0);
+        Building res = null;
+
         if (hud.currentState != Hud.State.DRAG){
             if ((hud.currentState == Hud.State.ROAD)&&(city.getFunds()>=10)) {
                 res = new Road(pos, city, true);
@@ -90,37 +92,37 @@ public class TiledMapStage extends Stage implements InputProcessor{
                 res = new Rail(pos, city, true);
             else if (hud.currentState == Hud.State.POWER)
                 res = new PowerLine(pos, city, true);
-            else if (hud.currentState == Hud.State.PARK)
-                res = new Park(pos, city, true);
-            else if (hud.currentState == Hud.State.RESIDENTIAL)
-                res = new ResidentialBuilding(pos, city, true);
-            else if (hud.currentState == Hud.State.COMMERCIAL)
-                res = new RecreationalBuilding(pos, city, true);
-            else if (hud.currentState == Hud.State.INDUSTRIAL)
-                res = new IndustrialBuilding(pos, city, true);
-            else if (hud.currentState == Hud.State.FIRE)
-                res = new Fire(pos, city, true);
-            else if (hud.currentState == Hud.State.POLICE)
-                res = new Police(pos, city, true);
-            else if (hud.currentState == Hud.State.STADIUM)
-                res = new Stadium(pos, city, true);
-            else if (hud.currentState == Hud.State.SEAPORT)
-                res = new Seaport(pos, city, true);
-            else if (hud.currentState == Hud.State.COAL)
-                res = new Coal(pos, city, true);
-            else if (hud.currentState == Hud.State.NUCLEAR)
-                res = new Nuclear(pos, city, true);
-            else if (hud.currentState == Hud.State.AIRPORT)
-                res = new Airport(pos, city, true);
-            else
-                res = new Road(pos, city, true);
-        if(city.getFunds() >= res.cost) {
-            city.getBuildings().add(res);
-            city.setFunds(city.getFunds() - res.cost);
-        }
 
-    }
-        System.out.print("added building");
+            else if(city.tiles[(int)pos.x/16][(int)pos.y/16].isUsable()) {
+                if (hud.currentState == Hud.State.PARK)
+                    res = new Park(pos, city, true);
+                else if (hud.currentState == Hud.State.RESIDENTIAL)
+                    res = new ResidentialBuilding(pos, city, true);
+                else if (hud.currentState == Hud.State.COMMERCIAL)
+                    res = new RecreationalBuilding(pos, city, true);
+                else if (hud.currentState == Hud.State.INDUSTRIAL)
+                    res = new IndustrialBuilding(pos, city, true);
+                else if (hud.currentState == Hud.State.FIRE)
+                    res = new Fire(pos, city, true);
+                else if (hud.currentState == Hud.State.POLICE)
+                    res = new Police(pos, city, true);
+                else if (hud.currentState == Hud.State.STADIUM)
+                    res = new Stadium(pos, city, true);
+                else if (hud.currentState == Hud.State.SEAPORT)
+                    res = new Seaport(pos, city, true);
+                else if (hud.currentState == Hud.State.COAL)
+                    res = new Coal(pos, city, true);
+                else if (hud.currentState == Hud.State.NUCLEAR)
+                    res = new Nuclear(pos, city, true);
+                else if (hud.currentState == Hud.State.AIRPORT)
+                    res = new Airport(pos, city, true);
+            }
+            if (res != null && city.getFunds() >= res.cost) {
+                city.getBuildings().add(res);
+                city.setFunds(city.getFunds() - res.cost);
+                System.out.println("added building");
+            }
+        }
 
         return super.touchDown(screenX, screenY, pointer, button);
     }

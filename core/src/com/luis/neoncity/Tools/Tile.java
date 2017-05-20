@@ -18,4 +18,8 @@ public class Tile {
     public void setUsable(boolean usable) {
         isUsable = usable;
     }
+
+    public String toString(){
+        return ""+isUsable();
+    }
 }

@@ -334,7 +334,7 @@ public class Hud implements InputProcessor{
                 button.setSize(50,50);
                 button.setColor(Color.DARK_GRAY);
                 stage.addActor(button);
-                button.setPosition(c*50,r*50+150);
+                button.setPosition(c*50,r*50+100);
                 // The currentState variable will be checked in TiledMapStage and will
                 // affect the type of building placed
             }

@@ -12,22 +12,22 @@ import com.luis.neoncity.Tools.City;
 public class ResidentialBuilding extends Building { //implements Building{
     protected int populationAdded;
 
-    public ResidentialBuilding(Vector3 loc, City contains, Boolean inUse){
-        super(loc, contains, inUse, 3, 100);
+    public ResidentialBuilding(Vector3 loc, City city, Boolean inUse){
+        super(loc, city, inUse, 3, 100);
 
         sprite = new Image(new Texture("res.png"));
         sprite.setPosition(loc.x, loc.y);
 
         populationNeeded = (int)(Math.random()*3+1); //random requirement of residents
         pollutionCreated = 1; //specific pollution to building type
-        populationAdded = (int) Math.ceil(populationNeeded * contains.getHappiness()); //The amount of people born or moving in is affected by city happiness
+        populationAdded = (int) Math.ceil(populationNeeded * city.getHappiness()); //The amount of people born or moving in is affected by city happiness
     }
 
-    //adds population to the city that contains the building
-    //     because the city contains the population variable
+    //adds population to the city that city the building
+    //     because the city city the population variable
     public void addPopulation()
     {
         if(inUse)
-            contains.setPopulation(contains.getPopulation() + populationAdded);
+            city.setPopulation(city.getPopulation() + populationAdded);
     }
 }

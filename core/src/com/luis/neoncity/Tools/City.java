@@ -15,6 +15,7 @@ public class City {
     private Integer population;
     private Integer pollution;
     private Double happiness;
+    public Tile[][] tiles;
 
     public ArrayList<Building> buildings;
 
@@ -26,7 +27,9 @@ public class City {
         pollution = 0;
         happiness = 100.00;
         buildings = new ArrayList<Building>();
+        tiles = new Tile[256][256];
     }
+
     public String getCityName() {
         return cityName;
     }
