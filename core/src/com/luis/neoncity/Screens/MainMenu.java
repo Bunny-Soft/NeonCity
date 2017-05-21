@@ -27,6 +27,7 @@ public class MainMenu implements Screen {
     private NeonCity game;
     protected Skin skin;
     private TextInput cityName;
+
     public MainMenu(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
@@ -72,9 +73,15 @@ public class MainMenu implements Screen {
         title = new Image(new Texture("menu.png"));
         title.setPosition(30, 550);
 
+        Image japanese = new Image(new Texture("doNotStepOnSnekInJapanese.png"));
+        japanese.setPosition(300, 500);
+        japanese.setScale(.5f);
+
         //adding image and button to display in order
+
         stage.addActor(sprite);
         stage.addActor(title);
+        stage.addActor(japanese);
         stage.addActor(start);
         stage.addActor(load);
         stage.addActor(options);

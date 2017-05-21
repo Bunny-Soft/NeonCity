@@ -320,7 +320,7 @@ public class Hud implements InputProcessor{
 
                 }
                 if(count==16) {
-                    sprite = new Sprite(new Texture("Cursor.png"));
+                    sprite = new Sprite(new Texture("cursor.png"));
                     icon = new SpriteDrawable(sprite);
                     button = new ImageButton(icon);
                     button.addListener(new ClickListener(){
