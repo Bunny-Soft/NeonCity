@@ -67,12 +67,12 @@ public class Hud implements InputProcessor{
 
     private Image cursor;
 
-
-    private ClickListener listener = new ClickListener();
     public Hud(SpriteBatch sb, City city) {
         this.city = city;
+
         viewport = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
+
         try {
             skin = new Skin(Gdx.files.internal("uiskin.json"));
         }
@@ -92,7 +92,7 @@ public class Hud implements InputProcessor{
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("pixel.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 32;
-        BitmapFont font = generator.generateFont(parameter); // font size 12 pixels
+        BitmapFont font = generator.generateFont(parameter);
         generator.dispose();
 
         Label.LabelStyle style = new Label.LabelStyle(font, com.badlogic.gdx.graphics.Color.WHITE);
@@ -339,6 +339,16 @@ public class Hud implements InputProcessor{
                 // affect the type of building placed
             }
         }
+        //for testing
+        TextButton taxes = new TextButton("Collect Taxes", skin);
+        taxes.addListener(new ClickListener(){
+            @Override public void clicked(InputEvent event, float x, float y) {
+                city.collectTaxes();
+                fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
+            }
+        });
+        stage.addActor(taxes);
+
     }
 
     @Override
@@ -360,6 +370,7 @@ public class Hud implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println(currentState.toString());
         fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
+
         return false;
     }
 
