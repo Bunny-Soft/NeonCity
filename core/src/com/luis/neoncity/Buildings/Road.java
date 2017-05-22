@@ -15,7 +15,7 @@ public class Road extends Building { //implements Building{
     public Road(Vector3 loc, City city, Boolean inUse){
         super(loc, city, inUse, 1, 10);
 
-        sprite = new Image(new Texture("road.png"));
+        sprite = new Image(new Texture("road.bmp"));
         sprite.setPosition(loc.x, loc.y);
 
         populationNeeded = (int)(Math.random()*4+3); //random requirement of workers

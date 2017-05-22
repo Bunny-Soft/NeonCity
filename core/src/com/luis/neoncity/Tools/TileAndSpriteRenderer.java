@@ -21,9 +21,10 @@ public class TileAndSpriteRenderer extends OrthogonalTiledMapRenderer {
         super.render();
 
         this.getBatch().begin();
-        for(Building b : city.getBuildings())
+        for(Building b : city.getBuildings()) {
             b.sprite.draw(this.getBatch(), 1f);
-
+            b.pop.draw(this.getBatch(), 1f);
+        }
         this.getBatch().end();
     }
 }

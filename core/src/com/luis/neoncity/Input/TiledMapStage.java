@@ -92,7 +92,6 @@ public class TiledMapStage extends Stage implements InputProcessor{
 				res = new Rail(pos, city, true);
 			else if (hud.currentState == Hud.State.POWER)
 				res = new PowerLine(pos, city, true);
-
 			else if (hud.currentState == Hud.State.PARK)
 				res = new Park(pos, city, true);
 			else if (hud.currentState == Hud.State.RESIDENTIAL)
@@ -117,6 +116,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 				res = new Airport(pos, city, true);
 			}
 			if (res != null && city.getFunds() >= res.cost && isPlaceable(pos, res.size)) {
+        res.setTilesUnusable();
 				city.getBuildings().add(res);
 				city.setFunds(city.getFunds() - res.cost);
 				System.out.println("added building");

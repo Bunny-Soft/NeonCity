@@ -13,7 +13,7 @@ public class City {
     private Integer population;
     private Integer pollution;
     private Double happiness;
-
+    private Integer power;
     public Tile[][] tiles;
 
     public ArrayList<Building> buildings;
@@ -22,9 +22,10 @@ public class City {
         this.cityName = cityName;
 
         this.funds = funds;
-        this.population = 100;
+        this.population = 500;
         pollution = 0;
         happiness = 100.00;
+        power = 100;
         buildings = new ArrayList<Building>();
         tiles = new Tile[256][256];
 
@@ -77,6 +78,16 @@ public class City {
     public void setHappiness(Double happiness)
     {
         this.happiness = happiness;
+    }
+
+    public Integer getPower()
+    {
+        return power;
+    }
+
+    public void setPower(int pow)
+    {
+        power = pow;
     }
 
     public ArrayList<Building> getBuildings() {
