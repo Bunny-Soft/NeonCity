@@ -15,6 +15,7 @@ public class City {
     private Integer population;
     private Integer pollution;
     private Double happiness;
+
     public Tile[][] tiles;
 
     public ArrayList<Building> buildings;

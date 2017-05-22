@@ -63,10 +63,11 @@ public class Hud implements InputProcessor{
     private Label fundsLabel;
     private Label popLabel;
     private Label nameLabel;
-    private Label errorLabel;
+    public Label timeLabel;
 
     private Image cursor;
 
+    private long startTime = System.currentTimeMillis();
 
     private ClickListener listener = new ClickListener();
     public Hud(SpriteBatch sb, City city) {
@@ -100,7 +101,9 @@ public class Hud implements InputProcessor{
         fundsLabel = new Label("$" + String.format("%07d", city.getFunds()), style);
         popLabel = new Label(String.format("%08d", city.getPopulation()), style);
         nameLabel = new Label(city.getCityName(), style);
+        timeLabel = new Label("00:00",style);
 
+        table.add(timeLabel).expandX().padTop(10);
         table.add(nameLabel).expandX().padTop(10);
         table.add(fundsLabel).expandX().padTop(10);
         table.add(popLabel).expandX().padTop(10);
@@ -360,6 +363,7 @@ public class Hud implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println(currentState.toString());
         fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
+        timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
         return false;
     }
 
@@ -376,7 +380,7 @@ public class Hud implements InputProcessor{
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         //cursor.setPosition((screenX/16) * 16, ((Gdx.graphics.getHeight() - screenY)/16)*16);
-
+        timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
         return false;
     }
 

@@ -5,11 +5,14 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.luis.neoncity.Input.TiledMapStage;
@@ -32,10 +35,11 @@ public class PlayScreen implements Screen {
     public Stage stage;
     SpriteBatch spriteBatch;
 
-
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+
+    private long startTime = System.currentTimeMillis();
 
     public PlayScreen(NeonCity game, SpriteBatch sb, City city, String mapName) {
         this.game = game;
@@ -58,8 +62,6 @@ public class PlayScreen implements Screen {
         else
             map = mapLoader.load("SimpleTest.tmx");
 
-
-
         renderer = new TileAndSpriteRenderer(map, city);
         //the stage does not render the tile map, must render sprites with custom render, this renderer does not render the stage
         //
@@ -79,6 +81,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         gameCam.update();
         renderer.setView(gameCam);
+        hud.timeLabel.setText(String.format("%1$TM:%1$TS",(System.currentTimeMillis()-startTime)));
     }
 
     @Override
