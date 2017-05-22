@@ -1,8 +1,6 @@
 package com.luis.neoncity.Tools;
 
 import com.luis.neoncity.Buildings.Building;
-import com.luis.neoncity.Buildings.ResidentialBuilding;
-
 import java.util.ArrayList;
 
 /**
@@ -30,6 +28,12 @@ public class City {
         power = 100;
         buildings = new ArrayList<Building>();
         tiles = new Tile[256][256];
+
+    }
+
+    public void collectTaxes(){
+
+        setFunds (Integer.sum((int)Math.ceil(population * 2.5), funds.intValue()));
     }
 
     public String getCityName() {
