@@ -117,7 +117,9 @@ public class TiledMapStage extends Stage implements InputProcessor{
                 else if (hud.currentState == Hud.State.AIRPORT)
                     res = new Airport(pos, city, true);
             }
+
             if (res != null && city.getFunds() >= res.cost) {
+                res.setTilesUnusable();
                 city.getBuildings().add(res);
                 city.setFunds(city.getFunds() - res.cost);
                 System.out.println("added building");

@@ -134,22 +134,21 @@ public class Hud implements InputProcessor{
 
                 }
                 if(count==2) {
-                    sprite = new Sprite(new Texture("road.png"));
+                    sprite = new Sprite(new Texture("road.bmp"));
                     sprite.setSize(48,48);
                     icon = new SpriteDrawable(sprite);
                     button = new ImageButton(icon);
                     button.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.ROAD;
-                            cursor = new Image(sprite.getTexture());
+                            currentState = State.ROAD;                          cursor = new Image(sprite.getTexture());
                         }
                     });
 
                 }
 
                 if(count==3) {
-                    sprite = new Sprite(new Texture("road.png"));
+                    sprite = new Sprite(new Texture("road.bmp"));
                     sprite.setSize(48,48);
                     icon = new SpriteDrawable(sprite);
                     button = new ImageButton(icon);
@@ -164,7 +163,7 @@ public class Hud implements InputProcessor{
                 }
 
                 if(count==4) {
-                    sprite = new Sprite(new Texture("road.png"));
+                    sprite = new Sprite(new Texture("road.bmp"));
                     sprite.setSize(48,48);
                     icon = new SpriteDrawable(sprite);
                     button = new ImageButton(icon);
@@ -360,6 +359,7 @@ public class Hud implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println(currentState.toString());
         fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
+        popLabel.setText("" + String.format("%07d", city.getPopulation()));
         return false;
     }
 
