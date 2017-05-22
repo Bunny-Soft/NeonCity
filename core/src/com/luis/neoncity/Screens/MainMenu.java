@@ -51,7 +51,7 @@ public class MainMenu implements Screen {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 sb.end();
-
+                dispose();
                 game.setScreen(new CityCreator(game, sb));
             }
         });
