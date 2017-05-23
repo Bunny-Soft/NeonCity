@@ -42,7 +42,7 @@ public class Building extends Actor {
         }
 
         pop = new Label("", skin);
-
+        pop.setScale(.5f);
         location = loc;
         this.city = city;
         this.inUse = inUse;

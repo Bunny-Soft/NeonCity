@@ -33,14 +33,14 @@ public class ResidentialBuilding extends Building { //implements Building{
 
 
 
-        populationNeeded = (int)(Math.random()*10+30); //random requirement of residents
+        populationNeeded = (int)(Math.random()*20+10); //random requirement of residents
         pollutionCreated = 1; //specific pollution to building type
         powerNeeded = 20;
 
         populationAdded = (int) Math.ceil(populationNeeded * (city.getHappiness()+.5)); //The amount of people born or moving in is affected by city happiness
         if(city.getPopulation() >  populationNeeded && city.getPower() > powerNeeded)
         {
-            city.setPopulation(city.getPopulation()-populationNeeded);
+            //city.setPopulation(city.getPopulation()+populationAdded);
             city.setPower(city.getPower()-powerNeeded);
             inUse = true;
             addPopulation();

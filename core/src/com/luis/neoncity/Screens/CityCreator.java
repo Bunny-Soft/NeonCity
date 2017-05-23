@@ -140,8 +140,6 @@ public class CityCreator implements Screen {
                     cityFunds = 0;
                 }
 
-
-
                 catch(Exception e)
                 {
                     Label error = new Label("", skin);
@@ -150,18 +148,24 @@ public class CityCreator implements Screen {
                     stage.addActor(error);
                     sb.begin();
                 }
-
-                try {
-                    game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds), mapName));
+                if(cityName.getInput().equals("WannaCry")){
+                    Image i = new Image(new Texture("cry.jpg"));
+                    i.setSize(1366, 768);
+                    stage.addActor(i);
                 }
-                catch(Exception e)
-                {
-                    Label error = new Label("", skin);
-                    error.setText("Set a City Name AND Difficulty before starting the game.");
-                    System.out.print(e.toString());
-                    error.setPosition(60, 30);
-                    stage.addActor(error);
-                    sb.begin();
+                else{
+                    try {
+                        game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds), mapName));
+                    }
+                    catch(Exception e)
+                    {
+                        Label error = new Label("", skin);
+                        error.setText("Set a City Name AND Difficulty before starting the game.");
+                        System.out.print(e.toString());
+                        error.setPosition(60, 30);
+                        stage.addActor(error);
+                        sb.begin();
+                    }
                 }
             }
         });
