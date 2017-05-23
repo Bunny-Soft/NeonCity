@@ -15,6 +15,7 @@ public class City {
     private Double happiness;
     private Integer power;
     public Tile[][] tiles;
+    public int months;
 
     public ArrayList<Building> buildings;
 
@@ -28,12 +29,13 @@ public class City {
         power = 100;
         buildings = new ArrayList<Building>();
         tiles = new Tile[256][256];
+        months = 0;
 
     }
 
     public void collectTaxes(){
 
-        setFunds (Integer.sum((int)Math.ceil(population * 2.5), funds.intValue()));
+        setFunds (Integer.sum((int)Math.ceil(population * 2), funds.intValue()));
     }
 
     public String getCityName() {

@@ -5,14 +5,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.luis.neoncity.Input.TiledMapStage;
@@ -64,7 +61,7 @@ public class PlayScreen implements Screen {
 
         renderer = new TileAndSpriteRenderer(map, city);
         //the stage does not render the tile map, must render sprites with custom render, this renderer does not render the stage
-        //
+
         gameCam.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
 
         stage = new TiledMapStage(gamePort, map, city, hud);
@@ -81,7 +78,11 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         gameCam.update();
         renderer.setView(gameCam);
-        hud.timeLabel.setText(String.format("%1$TM:%1$TS",(System.currentTimeMillis()-startTime)));
+        hud.timeLabel.setText(String.format("%1d-%4d" , (System.currentTimeMillis()-startTime)/1000/12, (System.currentTimeMillis()-startTime)/1000%12));
+
+        //TODO: this doesnt work, find a way to make it work
+        //if(0 == System.currentTimeMillis()-startTime/1000%12)
+        //    city.collectTaxes();
     }
 
     @Override

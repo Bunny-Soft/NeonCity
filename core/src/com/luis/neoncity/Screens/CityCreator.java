@@ -148,6 +148,7 @@ public class CityCreator implements Screen {
                     stage.addActor(error);
                     sb.begin();
                 }
+
                 if(cityName.getInput().equals("WannaCry")){
                     Image i = new Image(new Texture("cry.jpg"));
                     i.setSize(1366, 768);

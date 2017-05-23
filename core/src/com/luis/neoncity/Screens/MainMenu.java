@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.neoncity.NeonCity;
-import com.luis.neoncity.Tools.City;
 import com.luis.neoncity.Tools.TextInput;
 
 /**

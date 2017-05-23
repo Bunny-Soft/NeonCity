@@ -126,10 +126,12 @@ public class TiledMapStage extends Stage implements InputProcessor{
 	}
 
 	public boolean isPlaceable(Vector3 pos, int size){
-        //for (int x = (int)pos.x; x < (pos.x+size); x++)
-          //  for (int y = (int)pos.y; y < (pos.y+size); y++)
-                //if this tile is unusable return false, at the end return true
-		return city.tiles[(int)pos.x/16][(int)pos.y/16].isUsable();
+        for (int x = (int)pos.x; x < (pos.x+(size*16)); x += 16)
+            for (int y = (int)pos.y; y < (pos.y+(size*16)); y += 16)
+                if(!city.tiles[(int)(x/16)][(int)(y/16)].isUsable())
+                	return false;
+            	//if this tile is unusable return false, at the end return true
+		return true;
 	}
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {

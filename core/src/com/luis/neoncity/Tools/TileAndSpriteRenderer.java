@@ -3,7 +3,6 @@ package com.luis.neoncity.Tools;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.luis.neoncity.Buildings.Building;
-import com.luis.neoncity.Buildings.ResidentialBuilding;
 
 /**
  * Created by nl383118 on 5/17/2017.
