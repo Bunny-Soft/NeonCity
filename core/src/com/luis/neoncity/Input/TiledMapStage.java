@@ -84,7 +84,17 @@ public class TiledMapStage extends Stage implements InputProcessor{
 		Building res = null;
 
 		if (hud.currentState != Hud.State.DRAG){
-			if ((hud.currentState == Hud.State.ROAD)&&(city.getFunds()>=10)) {
+			if(hud.currentState == Hud.State.BULLDOZER) {
+				if (city.tiles[(int) pos.x / 16][(int) pos.y / 16].getBuilding() != 0)
+					try {
+						city.getBuildings().remove(city.tiles[(int) pos.x / 16][(int) pos.y / 16].getBuilding());
+
+					} catch (Exception e) {
+						System.out.println("Oh NO!!! This bug will be fixed soon!");
+
+					}
+			}
+			else if ((hud.currentState == Hud.State.ROAD)&&(city.getFunds()>=10)) {
 				res = new Road(pos, city, true);
 				city.setFunds(city.getFunds()-res.cost);
 			}
@@ -118,6 +128,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 			if (res != null && city.getFunds() >= res.cost && isPlaceable(pos, res.size)) {
         res.setTilesUnusable();
 				city.getBuildings().add(res);
+				city.tiles[(int)pos.x/16][(int)pos.y/16].setBuilding(city.getBuildings().size() - 1);
 				city.setFunds(city.getFunds() - res.cost);
 				System.out.println("added building");
 			}
