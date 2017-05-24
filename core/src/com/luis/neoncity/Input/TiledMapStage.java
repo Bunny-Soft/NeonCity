@@ -130,6 +130,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 				city.getBuildings().add(res);
 				city.tiles[(int)pos.x/16][(int)pos.y/16].setBuilding(city.getBuildings().size() - 1);
 				city.setFunds(city.getFunds() - res.cost);
+				res.addFunction();
 				System.out.println("added building");
 			}
 

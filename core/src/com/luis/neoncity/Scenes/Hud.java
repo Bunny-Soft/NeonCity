@@ -56,6 +56,9 @@ public class Hud implements InputProcessor{
     public Label popLabel;
     public Label nameLabel;
     public Label timeLabel;
+    private Label powLabel;
+    private  Label hapLabel;
+    private  Label polLabel;
 
     private long startTime = System.currentTimeMillis();
 
@@ -92,11 +95,17 @@ public class Hud implements InputProcessor{
         popLabel = new Label(String.format("%08d", city.getPopulation()), style);
         nameLabel = new Label(city.getCityName(), style);
         timeLabel = new Label("00:00",style);
+        powLabel = new Label(String.format("%04d", city.getPower()), style);
+        hapLabel = new Label("%03d" + city.getHappiness(), style);
+        polLabel = new Label(String.format("%03d", city.getPollution()), style);
 
         table.add(timeLabel).expandX().padTop(10);
         table.add(nameLabel).expandX().padTop(10);
         table.add(fundsLabel).expandX().padTop(10);
         table.add(popLabel).expandX().padTop(10);
+        table.add(powLabel).expandX().padTop(10);
+        table.add(hapLabel).expandX().padTop(10);
+        table.add(polLabel).expandX().padTop(10);
 
         stage.addActor(table);
     }
@@ -334,6 +343,12 @@ public class Hud implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println(currentState.toString());
 
+        fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
+        popLabel.setText("" + String.format("%07d", city.getPopulation()));
+        timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
+        powLabel.setText(String.format("%04d", city.getPower()));
+        hapLabel.setText("" + city.getHappiness());
+        polLabel.setText(String.format("%03d", city.getPollution()));
 
         return false;
     }
@@ -350,7 +365,6 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        //cursor.setPosition((screenX/16) * 16, ((Gdx.graphics.getHeight() - screenY)/16)*16);
         timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
         return false;
     }
