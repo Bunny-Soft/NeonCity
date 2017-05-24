@@ -14,19 +14,19 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/15/2017 and Changed by Zach on 5/23/17.
  */
 
-public class Building extends Actor {
+public class Building extends Actor { //super class of all other buildings that is a subclass of Actor so it can be added to a stage
 
-    protected Vector3 location;
+    protected Vector3 location; //position on map
     protected City city;
-    protected int populationNeeded, pollutionCreated, powerNeeded;
+    protected int populationNeeded, pollutionCreated, powerNeeded; //every building has these
 
-    public Boolean inUse;
-    public Label pop;
-    public Image sprite;
-    public int size;
-    public int cost;
+    public Boolean inUse; //if its working
+    public Label pop; //text on the building
+    public Image sprite; //image of the building
+    public int size; //tiles taken up by the building
+    public int cost; //funds cost to build
 
-    public Building()
+    public Building() //base constructor
     {
     }
 
@@ -50,7 +50,7 @@ public class Building extends Actor {
         this.cost = cost;
     }
 
-    public void setTilesUnusable(){
+    public void setTilesUnusable(){ //if tiles are unusable then buildings cant be built on them
         for(int x = (int)location.x/16; x < (int)location.x/16 + size; x++){
             for(int y = (int)location.y/16; y < (int)location.y/16 + size; y++){
                 city.tiles[x][y].setUsable(false);
@@ -78,7 +78,7 @@ public class Building extends Actor {
             city.setPollution(city.getPollution() + pollutionCreated);
     }
 
-    public void addFunction()
+    public void addFunction() //if building is built, cost, population, power come out and the buildings benefit goes back in
     {
 
     }

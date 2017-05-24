@@ -21,31 +21,31 @@ import com.luis.neoncity.Tools.City;
 import com.luis.neoncity.Tools.TextInput;
 
 /**
- * Created by jz367071 on 5/18/2017.
+ * Created by Zach on 5/18/2017.
  */
 
-public class CityCreator implements Screen {
-    private Stage stage;
-    protected SpriteBatch sb;
-    private Image back;
-    private Image options;
-    protected NeonCity game;
-    protected Skin skin;
-    private TextInput cityName;
-    private SelectBox cityDifficulty;
+public class CityCreator implements Screen { //it is a subclass of screen so layering doesn't occur
+    private Stage stage; //similar to a content pane
+    protected SpriteBatch sb; //pulls colors
+    private Image back; //background image
+    private Image options; //options sign image
+    protected NeonCity game; //game created once options are selected
+    protected Skin skin; //skin for labels and buttons
+    private TextInput cityName; //input box class created to take in text for a name selector
+    private SelectBox cityDifficulty; //comboBox menu that allows for difficulty to be selected, starting funds are scaled with difficulty
     private Integer cityFunds;
-    private String mapName;
+    private String mapName; //mapName is what decide which map is instantiated
     public CityCreator(NeonCity g, SpriteBatch s) {
         this.game = g;
         this.sb = s;
         sb.begin();
 
         //removed create(); and inserted its code where it was called
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        stage = new Stage(new ScreenViewport()); //new 'content pane'
+        Gdx.input.setInputProcessor(stage); //game views the stage that is setup
 
         try {
-            skin = new Skin(Gdx.files.internal("uiskin.json"));
+            skin = new Skin(Gdx.files.internal("uiskin.json")); //create skin from file
         }
         catch(Exception e){
             skin = new Skin();
@@ -57,34 +57,34 @@ public class CityCreator implements Screen {
        // start.addListener(new ChangeListener() {
         //    @Override
        //     public void changed (ChangeEvent event, Actor actor) {
-                cityDifficulty = new SelectBox(skin);
-                cityDifficulty.setName("Difficulty");
-                cityDifficulty.setSize(300, 100);
-                cityDifficulty.setPosition(120, 550);
-                String[] items = new String[3];
+                cityDifficulty = new SelectBox(skin); //creates comboBox
+                cityDifficulty.setName("Difficulty"); //name of the box
+                cityDifficulty.setSize(300, 100); //size
+                cityDifficulty.setPosition(120, 550); //location from bottom right
+                String[] items = new String[3]; //array to put into the box
                 items[0] = "Easy";
                 items[1] = "Medium";
                 items[2] = "Hard";
-                cityDifficulty.setItems(items);
+                cityDifficulty.setItems(items);//setting the options in the box
 
          //   }
        // });
 
 
-        TextButton load = new TextButton("Create City Name", skin, "default");
-        load.setSize(400, 100);
-        load.setPosition(120, 440);
+        TextButton load = new TextButton("Create City Name", skin, "default"); // button to pull up a textInput box
+        load.setSize(400, 100); //size
+        load.setPosition(120, 440); //location from bottom right
         load.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 cityName = new TextInput();
-                Gdx.input.getTextInput(cityName, "", "Dallas", "");
+                Gdx.input.getTextInput(cityName, "", "Dallas", ""); //new popup that is the Name creator
             }
         });
 
-        Sprite map1 = new Sprite(new Texture("seaport.png"));
-        map1.setSize(400,200);
-        ImageButton mapButton1 = new ImageButton(new SpriteDrawable(map1));
+        Sprite map1 = new Sprite(new Texture("seaport.png")); //image of the map1
+        map1.setSize(400,200); //image size
+        ImageButton mapButton1 = new ImageButton(new SpriteDrawable(map1)); //button
         mapButton1.setSize(400,200);
         mapButton1.setPosition(680, 450);
         mapButton1.addListener(new ChangeListener() {
@@ -94,7 +94,7 @@ public class CityCreator implements Screen {
             }
         });
 
-        Sprite map2 = new Sprite(new Texture("stadium.png"));
+        Sprite map2 = new Sprite(new Texture("stadium.png")); //map2
         map2.setSize(400,200);
         ImageButton mapButton2 = new ImageButton(new SpriteDrawable(map2));
         mapButton2.setSize(400,200);
@@ -106,7 +106,7 @@ public class CityCreator implements Screen {
             }
         });
 
-        Sprite map3 = new Sprite(new Texture("nuclear.png"));
+        Sprite map3 = new Sprite(new Texture("nuclear.png")); //map3
         map3.setSize(400,200);
         ImageButton mapButton3 = new ImageButton(new SpriteDrawable(map3));
         mapButton3.setSize(400,200);
@@ -118,7 +118,7 @@ public class CityCreator implements Screen {
             }
         });
 
-        TextButton exit = new TextButton("Continue", skin, "default");
+        TextButton exit = new TextButton("Continue", skin, "default"); //continue button
         exit.setSize(400, 100);
         exit.setPosition(120, 330);
         exit.addListener(new ChangeListener() {
@@ -126,7 +126,7 @@ public class CityCreator implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 sb.end();
 
-                try {
+                try {// gets starting funds based on selected difficulty
 
                 if(cityDifficulty.getSelected().equals("Easy"))
                     cityFunds = 10000;
@@ -138,7 +138,7 @@ public class CityCreator implements Screen {
                     cityFunds = 0;
                 }
 
-                catch(Exception e)
+                catch(Exception e) //if a difficulty/name/map isnt selected an error is thrown
                 {
                     Label error = new Label("", skin);
                     error.setText("Set a City Name AND Difficulty AND a Map before starting the game.");
@@ -147,7 +147,7 @@ public class CityCreator implements Screen {
                     sb.begin();
                 }
 
-                if(cityName.getInput().equals("WannaCry")){
+                if(cityName.getInput().equals("WannaCry")){ //easter egg
                     Image i = new Image(new Texture("cry.jpg"));
                     i.setSize(1366, 768);
                     stage.addActor(i);
@@ -158,8 +158,8 @@ public class CityCreator implements Screen {
                     }
                     catch(Exception e)
                     {
-                        Label error = new Label("", skin);
-                        error.setText("Set a City Name AND Difficulty before starting the game.");
+                        Label error = new Label("", skin); //catching null errors from players not selecting maps or names
+                        error.setText("Set a City Name AND Difficulty AND a Map before starting the game.");
                         System.out.print(e.toString());
                         error.setPosition(60, 30);
                         stage.addActor(error);
@@ -169,11 +169,13 @@ public class CityCreator implements Screen {
             }
         });
 
-        back = new Image(new Texture("black.png"));
+        back = new Image(new Texture("black.png")); //background
         back.setSize(1366, 768);
         options = new Image(new Texture("GameOptions.png"));
         options.setPosition(80, 660);
-
+        //stages are the canvas of the screen
+        //actors are objects that can be projected onto that canvas
+        //actors must be added to stages or they will not be rendered
         stage.addActor(back);
         stage.addActor(options);
         stage.addActor(cityDifficulty);

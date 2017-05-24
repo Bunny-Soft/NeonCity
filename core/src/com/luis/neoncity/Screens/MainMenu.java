@@ -18,58 +18,74 @@ import com.luis.neoncity.Tools.TextInput;
  * Created by Zach on 5/12/2017.
  */
 
-public class MainMenu implements Screen {
-    private Stage stage;
-    protected Image sprite;
-    private Image title;
-    private SpriteBatch sb;
-    private NeonCity game;
-    protected Skin skin;
-    private TextInput cityName;
+public class MainMenu implements Screen { //it is a subclass of screen so layering doesn't occur
+    private Stage stage;//similar to a content pane
+    protected Image sprite; //background
+    private Image title; //title image
+    private SpriteBatch sb; //colors
+    private NeonCity game; //game class
+    protected Skin skin; //skin
 
     public MainMenu(NeonCity g, SpriteBatch s) {
-        this.game = g;
-        this.sb = s;
+        this.game = g; //pulls game state
+        this.sb = s; //spritebatch is transferred
         sb.begin();
 
         //removed create(); and inserted its code where it was called
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        stage = new Stage(new ScreenViewport()); //The windows content pane
+        Gdx.input.setInputProcessor(stage); //screen uses the stage created
 
         try {
-            skin = new Skin(Gdx.files.internal("uiskin.json"));
+            skin = new Skin(Gdx.files.internal("uiskin.json")); //creating skin from file to use for a font
         }
         catch(Exception e){
             skin = new Skin();
         }
 
-        TextButton start = new TextButton("New Game", skin, "default");
-        start.setSize(300, 100);
-        start.setPosition(900, 550);
+        TextButton start = new TextButton("New Game", skin, "default"); //button has a listener to dispose of @MainMenu screen and create a @CityCreator screen
+        start.setSize(400, 100);
+        start.setPosition(850, 550);
         start.addListener(new ChangeListener() {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 sb.end();
                 dispose();
-                game.setScreen(new CityCreator(game, sb));
+                game.setScreen(new CityCreator(game, sb)); //switches screen to cityCreator
             }
         });
 
 
-        TextButton load = new TextButton("Load", skin, "default");
-        load.setSize(300, 100);
-        load.setPosition(900, 440);
+        TextButton load = new TextButton("Credits", skin, "default");// pulls a credits screen with the option to recreate the mainmenu to continue to the game.
+        load.setSize(400, 100);
+        load.setPosition(850, 440);
+        load.addListener(new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                sb.end();
+                dispose();
+                game.setScreen(new Credits(sb, game));
+            }
+        });
 
 
-        TextButton options = new TextButton("Options", skin, "default");
-        options.setSize(300, 100);
-        options.setPosition(900, 330);
+        TextButton options = new TextButton("Throw an Error", skin, "default"); //The ultimate bait button creates an array with 10 slots and calls the 12th
+        options.setSize(400, 100);
+        options.setPosition(850, 330);
+        options.addListener(new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                sb.end();
+                dispose();
+                int[] com = new int[10];
+                com[11] = 0;
+            }
+        });
 
         //sprite is the background image for the title
         sprite = new Image(new Texture("8bitCity.png"));
         sprite.setSize(1366, 768);
 
-        title = new Image(new Texture("menu.png"));
+        title = new Image(new Texture("menu.png")); // title image
         title.setPosition(30, 550);
 
         Image japanese = new Image(new Texture("doNotStepOnSnekInJapanese.png"));
@@ -119,5 +135,5 @@ public class MainMenu implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-    }
+    } //when screen is closed, memory leak is closed
 }
