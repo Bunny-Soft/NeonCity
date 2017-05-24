@@ -13,7 +13,7 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/15/2017 and Changed by Zach on 5/16/17.
  */
 
-public class ResidentialBuilding extends Building { //implements Building{
+public class ResidentialBuilding extends Building { //view building class for clarification
     protected int populationAdded;
     protected Vector3 loc;
     protected Skin skin;

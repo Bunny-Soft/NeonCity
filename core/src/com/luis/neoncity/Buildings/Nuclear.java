@@ -13,7 +13,7 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
-public class Nuclear extends Building {
+public class Nuclear extends Building {//view building class for clarification
 
     protected int powerAdded;
     protected Vector3 loc;

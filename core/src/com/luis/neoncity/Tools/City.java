@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 
 public class City {
+    //all values that determine how the city is doing and how it can be interacted with
     private String cityName;
     private Integer funds;
     private Integer population;
@@ -17,23 +18,23 @@ public class City {
     public Tile[][] tiles;
     public int months;
 
-    public ArrayList<Building> buildings;
+    public ArrayList<Building> buildings; //arraylist to keep track of all buildings in one location
 
-    public City(String cityName, Integer funds){
+    public City(String cityName, Integer funds){ //takes in city name from cityCreator screen and starting funds based on difficulty chosen
         this.cityName = cityName;
 
         this.funds = funds;
-        this.population = 500;
-        pollution = 0;
-        happiness = 100;
-        power = 100;
+        this.population = 500; //base populus
+        pollution = 0; //base pollution
+        happiness = 100; //base happiness
+        power = 100; //base power
         buildings = new ArrayList<Building>();
-        tiles = new Tile[256][256];
-        months = 0;
+        tiles = new Tile[256][256]; //map
+        months = 0; //timer
 
     }
 
-    public void collectTaxes(){
+    public void collectTaxes(){ //to collect extra money you give up happiness, a multiplier on all other benefits
 
         setFunds (Integer.sum((int)Math.ceil(population * 20), funds.intValue()));
         happiness = happiness - (int)(happiness/10);

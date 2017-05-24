@@ -14,43 +14,40 @@ import com.luis.neoncity.Tools.City;
  */
 
 public class Park extends Building { //implements Building{
-    protected int happyAdded;
-    protected Vector3 loc;
-    protected Skin skin;
+    protected int happyAdded; //global building purpose
+    protected Vector3 loc; // global location
+    protected Skin skin; //global skin
 
     public Park(Vector3 local, City city, Boolean inUse){
-        super(local, city, inUse, 1, 10);
+        super(local, city, inUse, 1, 10); //making the super constructor
 
         loc = local;
 
-        sprite = new Image(new Texture("park.png"));
-        sprite.setPosition(loc.x, loc.y);
+        sprite = new Image(new Texture("park.png"));//image of building
+        sprite.setPosition(loc.x, loc.y); //position on map of building
 
         try {
-            skin = new Skin(Gdx.files.internal("uiskin.json"));
+            skin = new Skin(Gdx.files.internal("uiskin.json")); //skin for labels
         }
-        catch (Exception e){
+        catch (Exception e){ //if skin causes an error, default to a basic skin
             skin = new Skin();
         }
 
         populationNeeded = (int)(Math.random()*4+3); //random requirement of workers
         pollutionCreated = 2; //specific pollution to building type
-        happyAdded = (int) Math.ceil(populationNeeded * (city.getHappiness()/10)); //The amount of happiness made is affected by city happiness and people working
+        happyAdded = 10; //The amount of happiness made is flat or it will increase far too fast
     }
 
     //adds funds to the city that city the building
     //     because the city city the population variable
-    public void addFunction()
+    public void addFunction() //vague method for all buildings to describe their benefits
     {
-        if(city.getPopulation() >  populationNeeded && city.getPower() > powerNeeded)
+        if(city.getPopulation() >  populationNeeded && city.getPower() > powerNeeded) // if reqs to build are met, build building and perform its function
         {
-            city.setPollution(city.getPollution() + pollutionCreated);
-            city.setPopulation(city.getPopulation()-populationNeeded);
-            city.setPower(city.getPower()-powerNeeded);
-            pop = new Label(""+happyAdded, skin);
-            pop.setPosition(loc.x+1, loc.y+1);
-            pop.setColor(Color.BLACK);
+            city.setPollution(city.getPollution() + pollutionCreated); //building things causes pollution no use currently
+            city.setPopulation(city.getPopulation()-populationNeeded); //people used to maintain the building are not part of the unused population
+            city.setPower(city.getPower()-powerNeeded); //taking free power away as building needs it
         }
-        city.setHappiness(city.getHappiness() + happyAdded);
+        city.setHappiness(city.getHappiness() + happyAdded); //Building was built, so people have a natural space causing happiness to increase
     }
 }
