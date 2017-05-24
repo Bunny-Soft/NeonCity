@@ -18,6 +18,10 @@ import com.luis.neoncity.Tools.TextInput;
  * Created by Zach on 5/12/2017.
  */
 
+/**
+ * Creates the main menu for the game
+ * has a background image, buttons, and tittle
+ */
 public class MainMenu implements Screen { //it is a subclass of screen so layering doesn't occur
     private Stage stage;//similar to a content pane
     protected Image sprite; //background
@@ -28,7 +32,7 @@ public class MainMenu implements Screen { //it is a subclass of screen so layeri
 
     public MainMenu(NeonCity g, SpriteBatch s) {
         this.game = g; //pulls game state
-        this.sb = s; //spritebatch is transferred
+        this.sb = s; //sprite batch is transferred
         sb.begin();
 
         //removed create(); and inserted its code where it was called

@@ -8,7 +8,10 @@ import com.luis.neoncity.Tools.City;
 /**
  * Created by Luis on 5/18/17.
  */
-
+/**
+ * A fire house is a building
+ * sets the position, cost, and sprite for a fire house
+ */
 public class Fire extends Building {
 
     public Fire(Vector3 loc, City contains, Boolean inUse){

@@ -13,6 +13,11 @@ import com.luis.neoncity.Tools.City;
  * Created by Zach on 5/16/17.
  */
 
+/**
+ * An industrial sector is a building
+ * sets the position, cost, and sprite for an industrial sector
+ * adds to pollution and productivity
+ */
 public class IndustrialBuilding extends Building {
     protected double fundsAdded;
     protected Skin skin;

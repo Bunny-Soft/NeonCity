@@ -9,6 +9,10 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
+/**
+ * A coal power plant is a building
+ * sets the position, cost, and sprite for a coal power plant
+ */
 public class Coal extends Building {
 
     public Coal(Vector3 loc, City contains, Boolean inUse){

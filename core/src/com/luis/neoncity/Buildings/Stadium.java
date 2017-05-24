@@ -9,6 +9,10 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
+/**
+ * A stadium is a building
+ * sets the position, cost, and sprite for a stadium
+ */
 public class Stadium extends Building {
 
     public Stadium(Vector3 loc, City contains, Boolean inUse){

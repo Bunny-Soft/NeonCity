@@ -13,6 +13,11 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/15/2017 and Changed by Zach on 5/16/17.
  */
 
+/**
+ * An Residential zone is a building
+ * sets the position, cost, and sprite for an residential zone
+ * adds population to the city
+ */
 public class ResidentialBuilding extends Building { //view building class for clarification
     protected int populationAdded;
     protected Vector3 loc;
@@ -37,7 +42,7 @@ public class ResidentialBuilding extends Building { //view building class for cl
         pollutionCreated = 1; //specific pollution to building type
         powerNeeded = 20;
 
-        populationAdded = (int) Math.ceil(populationNeeded * (city.getHappiness()/10*.5)); //The amount of people born or moving in is affected by city happiness
+        populationAdded = (int) Math.ceil(populationNeeded * (city.getHappiness()/10*.3)); //The amount of people born or moving in is affected by city happiness
     }
 
     //adds population to the city that city the building

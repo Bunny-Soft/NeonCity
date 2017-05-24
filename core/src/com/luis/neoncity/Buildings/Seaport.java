@@ -9,6 +9,10 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
+/**
+ * A Seaport is a building
+ * sets the position, cost, and sprite for a seaport
+ */
 public class Seaport extends Building {
 
     public Seaport(Vector3 loc, City contains, Boolean inUse){

@@ -13,6 +13,11 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
+/**
+ * A Nuclear power plant is a building
+ * sets the position, cost, and sprite for an Nuclear Power plant
+ * adds power to the grid
+ */
 public class Nuclear extends Building {//view building class for clarification
 
     protected int powerAdded;

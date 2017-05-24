@@ -22,6 +22,9 @@ import com.luis.neoncity.Tools.TileAndSpriteRenderer;
  * Created by Luis on 5/9/2017.
  */
 
+/**
+ * Creates the game screen that displays the hud, tile map, and buildings
+ */
 public class PlayScreen implements Screen {
     private NeonCity game;
     public City city;
@@ -91,13 +94,13 @@ public class PlayScreen implements Screen {
         month = (int)(System.currentTimeMillis()-startTime)/5000;
 
         //updates labels
-        hud.timeLabel.setText(String.format("%1d-%4d" , (month/12), month%12+1));
+        hud.timeLabel.setText(String.format("%2d-%2d" , (month/12), month%12+1));
         hud.fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
         hud.popLabel.setText("" + String.format("%07d", city.getPopulation()));
 
-        hud.powLabel.setText(String.format("%04d", city.getPower()));
-        hud.hapLabel.setText("" + city.getHappiness());
-        hud.polLabel.setText(String.format("%03d", city.getPollution()));
+        hud.powLabel.setText(String.format("Power: %04d", city.getPower()));
+        hud.hapLabel.setText(":) " + city.getHappiness());
+        hud.polLabel.setText(String.format("Pollution: %03d", city.getPollution()));
 
         //collects taxes every 12 months
         //12 months is 60 seconds
@@ -108,6 +111,7 @@ public class PlayScreen implements Screen {
         else if(month%12 == 1 && taxesCollected)
             taxesCollected = false;
 
+        //sets and checks the win and lose conditions
         if(city.getPopulation() >= 2500)
             hud.endLabel.setText("YOU WIN!");
         if(city.getHappiness() <= 0)

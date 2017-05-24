@@ -9,6 +9,10 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
+/**
+ * A railroad is a building
+ * sets the position, cost, and sprite for a railroad
+ */
 public class Rail extends Building {
 
     public Rail(Vector3 loc, City contains, Boolean inUse){

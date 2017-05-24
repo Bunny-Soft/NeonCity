@@ -9,6 +9,10 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/18/17.
  */
 
+/**
+ * A Police station is a building
+ * sets the position, cost, and sprite for a police station
+ */
 public class Police extends Building {
 
     public Police(Vector3 loc, City contains, Boolean inUse){

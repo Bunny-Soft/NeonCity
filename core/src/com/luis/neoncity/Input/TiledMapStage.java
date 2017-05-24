@@ -17,6 +17,9 @@ import com.luis.neoncity.Tools.Tile;
  * Created by Luis on 5/11/2017.
  */
 
+/**
+ * Handles input on the tiled map, sets up a stage for it
+ */
 public class TiledMapStage extends Stage implements InputProcessor{
 	private Vector3 lastTouch;
 	private Stage stage;
@@ -31,6 +34,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 		lastTouch = new Vector3();
 		stage = this;
 
+		//created a 2d array for the tile map, allows the system to check if a building is placeable
 		for (MapLayer layer : tiledMap.getLayers()) {
 			TiledMapTileLayer tiledLayer = (TiledMapTileLayer) layer;
 			for (int x = 0; x < tiledLayer.getWidth(); x++) {
@@ -45,6 +49,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 		}
 	}
 
+	//moves the camera by the deference in mouse location
 	private void moveCamera( int screenX, int screenY ) {
 		Vector3 newPosition = getNewCameraPosition(screenX, screenY);
 		//if(!cameraOutOfLimit( new Vector3(stage.getCamera().position.add(newPosition))))
@@ -52,6 +57,13 @@ public class TiledMapStage extends Stage implements InputProcessor{
 		lastTouch.set(screenX, screenY, 0);
 	}
 
+	/**
+	 * takes the last location of the mouse and subtracts it from the new
+	 * returns the deference
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	private Vector3 getNewCameraPosition(int x, int y) {
 		Vector3 newPosition = lastTouch;
 		newPosition.sub(x, y, 0);
@@ -74,12 +86,17 @@ public class TiledMapStage extends Stage implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		//resets the last touch when a new drag is started
 		lastTouch.set(screenX, screenY, 0);
+
+		//stores the world position of the click
 		Vector3 test = stage.getCamera().unproject(new Vector3(screenX, screenY, 0));
 		System.out.println("(" + (int) (test.x / 16) + ", " + (int) (test.y / 16) + ")");
 		Vector3 pos = new Vector3((int)test.x / 16 * 16, (int) (test.y / 16) * 16, 0);
-		Building res = null;
 
+		Building res = null;
+		//creates a new building when clicked, based on selected building,
+		//available funds, use-abilitity of that plot
 		if (hud.currentState != Hud.State.DRAG){
 			if(hud.currentState == Hud.State.BULLDOZER) {
 				if (city.tiles[(int) pos.x / 16][(int) pos.y / 16].getBuilding() != 0)
@@ -134,6 +151,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 		return super.touchDown(screenX, screenY, pointer, button);
 	}
 
+	//checks if any of the tiles within the buildings size are not usable
 	public boolean isPlaceable(Vector3 pos, int size){
         for (int x = (int)pos.x; x < (pos.x+(size*16)); x += 16)
             for (int y = (int)pos.y; y < (pos.y+(size*16)); y += 16)
@@ -141,6 +159,14 @@ public class TiledMapStage extends Stage implements InputProcessor{
                 	return false;
 		return true;
 	}
+
+	/**
+	 * when the mouse is dragged, move the camera
+	 * @param screenX
+	 * @param screenY
+	 * @param pointer
+	 * @return
+	 */
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		moveCamera(screenX, screenY);

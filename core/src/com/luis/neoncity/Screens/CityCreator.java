@@ -24,6 +24,10 @@ import com.luis.neoncity.Tools.TextInput;
  * Created by Zach on 5/18/2017.
  */
 
+/**
+ * Display for creating a new city
+ * allows you to set difficulty, city name, and map
+ */
 public class CityCreator implements Screen {
 	private Stage stage;
 	protected SpriteBatch sb;
@@ -35,6 +39,7 @@ public class CityCreator implements Screen {
 	private SelectBox cityDifficulty;
 	private Integer cityFunds;
 	private String mapName;
+
 	public CityCreator(NeonCity g, SpriteBatch s) {
 		this.game = g;
 		this.sb = s;
@@ -44,6 +49,7 @@ public class CityCreator implements Screen {
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 
+		//sometimes this causes problems, now it doesnt
 		try {
 			skin = new Skin(Gdx.files.internal("uiskin.json"));
 		}
@@ -51,7 +57,7 @@ public class CityCreator implements Screen {
 			skin = new Skin();
 		}
 
-
+		//creates difficulty selector
 		cityDifficulty = new SelectBox(skin);
 		cityDifficulty.setName("Difficulty");
 		cityDifficulty.setSize(300, 100);
@@ -63,7 +69,7 @@ public class CityCreator implements Screen {
 		cityDifficulty.setItems(items);
 
 
-
+		// button to allow for city name to be changed
 		TextButton load = new TextButton("Create City Name", skin, "default");
 		load.setSize(400, 100);
 		load.setPosition(120, 440);
@@ -75,6 +81,7 @@ public class CityCreator implements Screen {
 			}
 		});
 
+		//Displays each map option, handles their input
 		Sprite map1 = new Sprite(new Texture("map1.png"));
 		map1.setSize(300,200);
 		ImageButton mapButton1 = new ImageButton(new SpriteDrawable(map1));
@@ -111,6 +118,7 @@ public class CityCreator implements Screen {
 			}
 		});
 
+		// creates the city with the given parameters
 		TextButton exit = new TextButton("Continue", skin, "default");
 		exit.setSize(400, 100);
 		exit.setPosition(120, 330);
@@ -120,7 +128,7 @@ public class CityCreator implements Screen {
 				sb.end();
 
 				try {
-
+				//sets city funds
 				if(cityDifficulty.getSelected().equals("Easy"))
 					cityFunds = 10000;
 				else if(cityDifficulty.getSelected().equals("Medium"))
@@ -130,7 +138,7 @@ public class CityCreator implements Screen {
 				else
 					cityFunds = 0;
 				}
-
+				//if requirements arent fullfilled, error is displayed for player to correct
 				catch(Exception e)
 				{
 					Label error = new Label("", skin);
@@ -139,13 +147,14 @@ public class CityCreator implements Screen {
 					stage.addActor(error);
 					sb.begin();
 				}
-
+				//easter egg
 				if(cityName.getInput().equals("WannaCry")){
 					Image i = new Image(new Texture("cry.jpg"));
 					i.setSize(1366, 768);
 					stage.addActor(i);
 				}
 				else{
+
 					try {
 						game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds), mapName));
 					}

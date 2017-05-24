@@ -12,8 +12,12 @@ import com.luis.neoncity.Tools.City;
 /**
  * Created by Luis on 5/18/17.
  */
-
-public class Park extends Building { //implements Building{
+/**
+ * A park is a building
+ * sets the position, cost, and sprite for a new park
+ * parks add happiness
+ */
+public class Park extends Building {
     protected int happyAdded; //global building purpose
     protected Vector3 loc; // global location
     protected Skin skin; //global skin

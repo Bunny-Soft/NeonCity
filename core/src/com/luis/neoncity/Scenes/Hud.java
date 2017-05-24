@@ -57,9 +57,9 @@ public class Hud implements InputProcessor{
     public Label nameLabel;
     public Label timeLabel;
 
-    private Label powLabel;
-    private  Label hapLabel;
-    private  Label polLabel;
+    public Label powLabel;
+    public  Label hapLabel;
+    public  Label polLabel;
     public Label endLabel;  // Label that appears only when end game conditions are reached
 
     private long startTime = System.currentTimeMillis();

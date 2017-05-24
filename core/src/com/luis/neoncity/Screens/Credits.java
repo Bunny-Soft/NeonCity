@@ -15,9 +15,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.neoncity.NeonCity;
 
 /**
- * Created by jz367071 on 5/24/2017.
+ * Created by Zach on 5/24/2017.
  */
 
+/**
+ * Displays credits for the game
+ */
 public class Credits implements Screen{
     private Stage stage;//similar to a content pane
     protected Image sprite; //background

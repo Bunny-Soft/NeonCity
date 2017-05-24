@@ -10,6 +10,10 @@ import com.luis.neoncity.Tools.City;
  * Created by Luis on 5/15/2017 and Changed by Zach on 5/16/17.
  */
 
+/**
+ * An Recreational zone is a building
+ * sets the position, cost, and sprite for an recreational zone
+ */
 public class RecreationalBuilding extends Building {
     protected int happinessAdded;
 
