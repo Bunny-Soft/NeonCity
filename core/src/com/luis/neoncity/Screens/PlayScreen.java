@@ -89,10 +89,13 @@ public class PlayScreen implements Screen {
             taxesCollected = true;
             city.collectTaxes();
         }
-        else if(month%12 == 1 && !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!taxesCollected)
+        else if(month%12 == 1 && taxesCollected)
             taxesCollected = false;
 
-
+        if(city.getPopulation() >= 2500)
+            hud.endLabel.setText("YOU WIN!");
+        if(city.getHappiness() <= 0)
+            hud.endLabel.setText("YOU LOSE!");
     }
 
     @Override
