@@ -35,7 +35,7 @@ public class City {
 
     public void collectTaxes(){
 
-        setFunds (Integer.sum((int)Math.ceil(population * 20), funds.intValue()));
+        setFunds (Integer.sum((int)Math.ceil(population * 2), funds.intValue()));
         happiness = happiness - (int)(happiness/10);
     }
 
