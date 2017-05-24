@@ -6,6 +6,10 @@ import com.badlogic.gdx.Input;
  * Created by Zach on 5/17/2017.
  */
 
+/**
+ * Implements an abstract class in order to obtain user input
+ * used by the CityCreator to get the city name
+ */
 public class TextInput implements Input.TextInputListener {
 
     String input = "null";

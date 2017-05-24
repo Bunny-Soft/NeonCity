@@ -4,6 +4,10 @@ package com.luis.neoncity.Tools;
  * Created by Jacob on 5/19/2017.
  */
 
+/**
+ *The TileMapStage creates an object of this to mirror the tile map
+ * used to check if the tile is usable, and what building is located there
+ */
 public class Tile {
     boolean isUsable;
     int building;

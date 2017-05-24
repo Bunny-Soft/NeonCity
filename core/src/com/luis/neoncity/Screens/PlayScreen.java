@@ -37,6 +37,7 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer;
     private long startTime = System.currentTimeMillis();
     private boolean taxesCollected;
+    private int month;
 
     public PlayScreen(NeonCity game, SpriteBatch sb, City city, String mapName) {
         this.game = game;
@@ -46,8 +47,10 @@ public class PlayScreen implements Screen {
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(NeonCity.V_WIDTH, NeonCity.V_HEIGHT, gameCam);
 
+        //creates a hud object
         hud = new Hud(sb, city);
 
+        //loads the selected map
         mapLoader = new TmxMapLoader();
 
         if(mapName.equals("islandTest"))
@@ -59,6 +62,7 @@ public class PlayScreen implements Screen {
         else
             map = mapLoader.load("SimpleTest.tmx");
 
+
         renderer = new TileAndSpriteRenderer(map, city);
         //the stage does not render the tile map, must render sprites with custom render, this renderer does not render the stage
 
@@ -66,7 +70,9 @@ public class PlayScreen implements Screen {
 
         stage = new TiledMapStage(gamePort, map, city, hud);
 
+        //set to true so taxes are not collected on year 0
         taxesCollected = true;
+        //allows multiple objects to be input processors
         InputMultiplexer im = new InputMultiplexer(hud.stage, stage,hud );
         Gdx.input.setInputProcessor(im);
     }
@@ -77,14 +83,24 @@ public class PlayScreen implements Screen {
     }
 
     public void update(float dt) {
+        //updates the camera
         gameCam.update();
         renderer.setView(gameCam);
-        int month = (int)(System.currentTimeMillis()-startTime)/1000;
-        hud.timeLabel.setText(String.format("%1d-%4d" , (System.currentTimeMillis()-startTime)/1000/12, (System.currentTimeMillis()-startTime)/1000%12));
+
+        //updates the current month, one month is 5 seconds
+        month = (int)(System.currentTimeMillis()-startTime)/5000;
+
+        //updates labels
+        hud.timeLabel.setText(String.format("%1d-%4d" , (month/12), month%12+1));
         hud.fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
         hud.popLabel.setText("" + String.format("%07d", city.getPopulation()));
-        hud.timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
 
+        hud.powLabel.setText(String.format("%04d", city.getPower()));
+        hud.hapLabel.setText("" + city.getHappiness());
+        hud.polLabel.setText(String.format("%03d", city.getPollution()));
+
+        //collects taxes every 12 months
+        //12 months is 60 seconds
         if(month%12 == 0 && !taxesCollected) {
             taxesCollected = true;
             city.collectTaxes();
@@ -97,14 +113,19 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        //on every render, update values
         update(delta);
 
+        //sets the background color to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //renders the tiles and buildings before the HUD
         renderer.render();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+
+        //renders the hud, on top of everything else
         hud.stage.draw();
     }
 

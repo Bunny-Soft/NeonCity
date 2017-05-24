@@ -7,6 +7,11 @@ import java.util.ArrayList;
  * Created by Luis on 5/16/2017 and Changed by Zach on 5/20/17.
  */
 
+/**
+ * City class contains everything that makes a city in our game
+ * If we save all the global variables, and reload them, we would be able to
+ *
+ */
 public class City {
     private String cityName;
     private Integer funds;
@@ -19,24 +24,34 @@ public class City {
 
     public ArrayList<Building> buildings;
 
+    /**
+     * Creates a new City with set name and funds
+     * @param cityName
+     * name of the city
+     * @param funds
+     *starting funds of the city
+     */
     public City(String cityName, Integer funds){
         this.cityName = cityName;
 
         this.funds = funds;
-        this.population = 500;
+        this.population = 0;
         pollution = 0;
         happiness = 100;
-        power = 100;
+        power = 0;
         buildings = new ArrayList<Building>();
         tiles = new Tile[256][256];
         months = 0;
 
     }
 
+    /**
+     * Called by the PlayScreen to collect taxes every 12 months
+     * collecting taxes makes people unhappy
+     */
     public void collectTaxes(){
-
-        setFunds (Integer.sum((int)Math.ceil(population * 20), funds.intValue()));
-        happiness = happiness - (int)(happiness/10);
+        setFunds (Integer.sum((int)Math.ceil(population *1.5), funds.intValue()));
+        happiness = happiness - (int)(happiness/15);
     }
 
     public String getCityName() {

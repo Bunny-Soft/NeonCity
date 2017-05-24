@@ -50,9 +50,10 @@ public class Hud implements InputProcessor{
     public Label nameLabel;
     public Label timeLabel;
 
-    private Label powLabel;
-    private  Label hapLabel;
-    private  Label polLabel;
+    public Label powLabel;
+    public  Label hapLabel;
+    public  Label polLabel;
+
     private long startTime = System.currentTimeMillis();
 
     public Hud(SpriteBatch sb, City city) {
@@ -88,9 +89,9 @@ public class Hud implements InputProcessor{
         popLabel = new Label(String.format("%08d", city.getPopulation()), style);
         nameLabel = new Label(city.getCityName(), style);
         timeLabel = new Label("00:00",style);
-        powLabel = new Label(String.format("%04d", city.getPower()), style);
-        hapLabel = new Label("%03d" + city.getHappiness(), style);
-        polLabel = new Label(String.format("%03d", city.getPollution()), style);
+        powLabel = new Label(String.format("Power: %04d", city.getPower()), style);
+        hapLabel = new Label(":) %03d" + city.getHappiness(), style);
+        polLabel = new Label(String.format("Pollution: %03d", city.getPollution()), style);
 
         table.add(timeLabel).expandX().padTop(10);
         table.add(nameLabel).expandX().padTop(10);
@@ -339,12 +340,6 @@ public class Hud implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println(currentState.toString());
 
-        fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
-        popLabel.setText("" + String.format("%07d", city.getPopulation()));
-        timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
-        powLabel.setText(String.format("%04d", city.getPower()));
-        hapLabel.setText("" + city.getHappiness());
-        polLabel.setText(String.format("%03d", city.getPollution()));
 
         return false;
     }
@@ -361,7 +356,6 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
         return false;
     }
 
