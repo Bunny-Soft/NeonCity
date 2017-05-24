@@ -4,7 +4,7 @@ import com.luis.neoncity.Buildings.Building;
 import java.util.ArrayList;
 
 /**
- * Created by Luis on 5/16/2017  and Changed by Zach on 5/16/17.
+ * Created by Luis on 5/16/2017 and Changed by Zach on 5/20/17.
  */
 
 public class City {

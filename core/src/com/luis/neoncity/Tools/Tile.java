@@ -3,7 +3,7 @@ package com.luis.neoncity.Tools;
 import com.luis.neoncity.Buildings.Building;
 
 /**
- * Created by nl383118 on 5/19/2017.
+ * Created by Jacob on 5/19/2017.
  */
 
 public class Tile {

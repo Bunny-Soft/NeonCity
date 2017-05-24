@@ -22,12 +22,4 @@ public class IndustrialBuilding extends Building {
         pollutionCreated = 2; //specific pollution to building type
         fundsAdded = (int) Math.ceil(populationNeeded * (city.getHappiness()*10)); //The amount of money made is affected by city happiness and people working
     }
-
-    //adds funds to the city that contains the building
-    //     because the city city the population variable
-    public void addFunds()
-    {
-        if(inUse)
-            city.setFunds(city.getFunds() + fundsAdded);
-    }
 }

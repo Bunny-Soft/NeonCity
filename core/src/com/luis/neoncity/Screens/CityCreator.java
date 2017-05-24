@@ -20,8 +20,6 @@ import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Tools.City;
 import com.luis.neoncity.Tools.TextInput;
 
-import java.util.concurrent.ExecutionException;
-
 /**
  * Created by jz367071 on 5/18/2017.
  */

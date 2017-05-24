@@ -14,6 +14,17 @@ task run(dependsOn: classes, type: JavaExec) {
     ignoreExitValue = true
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'com.luis.neoncity.desktop.DesktopLauncher'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 task debug(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath

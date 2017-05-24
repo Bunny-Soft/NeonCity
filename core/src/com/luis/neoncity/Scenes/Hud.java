@@ -24,9 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.luis.neoncity.NeonCity;
 import com.luis.neoncity.Tools.City;
 
-import java.util.ArrayList;
-//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 /**
  * Created by Luis and Jacob on 5/9/2017.
  */
@@ -42,24 +39,19 @@ public class Hud implements InputProcessor{
         COAL,       NUCLEAR,
         AIRPORT,    DRAG};
     public State currentState;
-
     private SpriteDrawable icon;
     private Sprite sprite;
-
     private Viewport viewport;
+    private City city;
+
     public Stage stage;
     public Skin skin;
-
-    City city;
-
-    private Label fundsLabel;
-    private Label popLabel;
-    private Label nameLabel;
+    public Label fundsLabel;
+    public Label popLabel;
+    public Label nameLabel;
     public Label timeLabel;
 
     private Image cursor;
-
-
     private long startTime = System.currentTimeMillis();
 
     public Hud(SpriteBatch sb, City city) {
@@ -384,7 +376,6 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        //cursor.setPosition((screenX/16) * 16, ((Gdx.graphics.getHeight() - screenY)/16)*16);
         timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
         return false;
     }

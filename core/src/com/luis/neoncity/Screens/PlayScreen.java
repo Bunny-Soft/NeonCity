@@ -26,11 +26,11 @@ public class PlayScreen implements Screen {
     private NeonCity game;
     public City city;
 
-    public  OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
     public Stage stage;
-    SpriteBatch spriteBatch;
+    public SpriteBatch spriteBatch;
+    public  OrthographicCamera gameCam;
 
     private TmxMapLoader mapLoader;
     private TiledMap map;

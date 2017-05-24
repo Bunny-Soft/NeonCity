@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.luis.neoncity.Tools.City;
+
 /**
  * Created by Luis on 5/15/2017 and Changed by Zach on 5/16/17.
  */
-
 
 public class ResidentialBuilding extends Building { //implements Building{
     protected int populationAdded;
@@ -22,7 +22,6 @@ public class ResidentialBuilding extends Building { //implements Building{
         sprite = new Image(new Texture("res.png"));
         sprite.setPosition(loc.x, loc.y);
 
-
         Skin skin;
         try {
             skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -30,8 +29,6 @@ public class ResidentialBuilding extends Building { //implements Building{
         catch (Exception e){
             skin = new Skin();
         }
-
-
 
         populationNeeded = (int)(Math.random()*20+10); //random requirement of residents
         pollutionCreated = 1; //specific pollution to building type

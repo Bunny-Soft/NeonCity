@@ -13,21 +13,18 @@ import com.luis.neoncity.Scenes.Hud;
 import com.luis.neoncity.Tools.City;
 import com.luis.neoncity.Tools.Tile;
 
-import java.util.Arrays;
-
 /**
  * Created by Luis on 5/11/2017.
  */
 
 public class TiledMapStage extends Stage implements InputProcessor{
-	private TiledMap tiledMap;
 	private Vector3 lastTouch;
 	private Stage stage;
-	City city;
-	Hud hud;
+	private City city;
+	private Hud hud;
+
 	public TiledMapStage(Viewport viewport, TiledMap tiledMap, City city, Hud hud) {
 		super(viewport);
-		this.tiledMap = tiledMap;
 		this.city = city;
 		this.hud = hud;
 
@@ -130,7 +127,6 @@ public class TiledMapStage extends Stage implements InputProcessor{
             for (int y = (int)pos.y; y < (pos.y+(size*16)); y += 16)
                 if(!city.tiles[(int)(x/16)][(int)(y/16)].isUsable())
                 	return false;
-            	//if this tile is unusable return false, at the end return true
 		return true;
 	}
 	@Override
