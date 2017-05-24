@@ -37,8 +37,6 @@ public class Park extends Building { //implements Building{
         pollutionCreated = 2; //specific pollution to building type
         happyAdded = (int) Math.ceil(populationNeeded * (city.getHappiness()/10)); //The amount of happiness made is affected by city happiness and people working
     }
-<<<<<<< HEAD
-=======
 
     //adds funds to the city that city the building
     //     because the city city the population variable
@@ -55,5 +53,4 @@ public class Park extends Building { //implements Building{
         }
         city.setHappiness(city.getHappiness() + happyAdded);
     }
->>>>>>> origin/master
 }

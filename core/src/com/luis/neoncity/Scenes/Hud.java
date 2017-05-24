@@ -10,11 +10,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -46,25 +44,15 @@ public class Hud implements InputProcessor{
 
     public Stage stage;
     public Skin skin;
-<<<<<<< HEAD
-=======
 
-    City city;
-
->>>>>>> origin/master
     public Label fundsLabel;
     public Label popLabel;
     public Label nameLabel;
     public Label timeLabel;
-<<<<<<< HEAD
 
-    private Image cursor;
-=======
     private Label powLabel;
     private  Label hapLabel;
     private  Label polLabel;
-
->>>>>>> origin/master
     private long startTime = System.currentTimeMillis();
 
     public Hud(SpriteBatch sb, City city) {
@@ -108,9 +96,12 @@ public class Hud implements InputProcessor{
         table.add(nameLabel).expandX().padTop(10);
         table.add(fundsLabel).expandX().padTop(10);
         table.add(popLabel).expandX().padTop(10);
-        table.add(powLabel).expandX().padTop(10);
-        table.add(hapLabel).expandX().padTop(10);
-        table.add(polLabel).expandX().padTop(10);
+
+        table.row();
+
+        table.add(powLabel).expandX();
+        table.add(hapLabel).expandX();
+        table.add(polLabel).expandX();
 
         stage.addActor(table);
     }

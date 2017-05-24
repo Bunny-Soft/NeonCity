@@ -26,12 +26,8 @@ public class ResidentialBuilding extends Building { //implements Building{
         sprite = new Image(new Texture("res.png"));
         sprite.setPosition(loc.x, loc.y);
 
-<<<<<<< HEAD
         Skin skin;
-=======
 
-
->>>>>>> origin/master
         try {
             skin = new Skin(Gdx.files.internal("uiskin.json"));
         }

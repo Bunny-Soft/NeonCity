@@ -1,7 +1,5 @@
 package com.luis.neoncity.Tools;
 
-import com.luis.neoncity.Buildings.Building;
-
 /**
  * Created by Jacob on 5/19/2017.
  */

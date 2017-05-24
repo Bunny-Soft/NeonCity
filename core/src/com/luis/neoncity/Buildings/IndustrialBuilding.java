@@ -42,8 +42,6 @@ public class IndustrialBuilding extends Building {
 
 
     }
-<<<<<<< HEAD
-=======
 
     public void addFunction()
     {
@@ -58,5 +56,4 @@ public class IndustrialBuilding extends Building {
         }
         city.setFunds(city.getFunds()+(int)(fundsAdded));
     }
->>>>>>> origin/master
 }
