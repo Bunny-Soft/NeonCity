@@ -26,8 +26,6 @@ public class ResidentialBuilding extends Building { //implements Building{
         sprite = new Image(new Texture("res.png"));
         sprite.setPosition(loc.x, loc.y);
 
-        Skin skin;
-
         try {
             skin = new Skin(Gdx.files.internal("uiskin.json"));
         }
@@ -40,7 +38,6 @@ public class ResidentialBuilding extends Building { //implements Building{
         powerNeeded = 20;
 
         populationAdded = (int) Math.ceil(populationNeeded * (city.getHappiness()/10*.5)); //The amount of people born or moving in is affected by city happiness
-
     }
 
     //adds population to the city that city the building
@@ -53,7 +50,7 @@ public class ResidentialBuilding extends Building { //implements Building{
             city.setPollution(city.getPollution() + pollutionCreated);
             city.setPower(city.getPower()-powerNeeded);
             inUse = true;
-            pop = new Label(""+populationAdded, skin);
+            pop = new Label("" + populationAdded, skin);
             pop.setPosition(loc.x+1, loc.y+1);
             pop.setColor(Color.BLACK);
         }

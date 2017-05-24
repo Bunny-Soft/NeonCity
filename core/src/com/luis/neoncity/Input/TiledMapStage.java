@@ -123,7 +123,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 				res = new Airport(pos, city, true);
 			}
 			if (res != null && city.getFunds() >= res.cost && isPlaceable(pos, res.size)) {
-        res.setTilesUnusable();
+        		res.setTilesUnusable();
 				city.getBuildings().add(res);
 				city.tiles[(int)pos.x/16][(int)pos.y/16].setBuilding(city.getBuildings().size() - 1);
 				city.setFunds(city.getFunds() - res.cost);
