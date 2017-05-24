@@ -52,16 +52,13 @@ public class Hud implements InputProcessor{
 
     City city;
 
-    private Label fundsLabel;
-    private Label popLabel;
-    private Label nameLabel;
+    public Label fundsLabel;
+    public Label popLabel;
+    public Label nameLabel;
     public Label timeLabel;
     private Label powLabel;
     private  Label hapLabel;
     private  Label polLabel;
-
-    private Image cursor;
-
 
     private long startTime = System.currentTimeMillis();
 
@@ -77,7 +74,6 @@ public class Hud implements InputProcessor{
         catch (Exception e){
             skin = new Skin();
         }
-        cursor = new Image(new Texture("cursor.png"));
 
         currentState = State.DRAG;
 
@@ -112,7 +108,6 @@ public class Hud implements InputProcessor{
         table.add(polLabel).expandX().padTop(10);
 
         stage.addActor(table);
-        stage.addActor(cursor);
     }
 
     public void sideButtons(){
@@ -123,7 +118,6 @@ public class Hud implements InputProcessor{
                 count++;
                 ImageButton button = new ImageButton(new SpriteDrawable(new Sprite(new Texture("ui.png"))));
 
-
                 if(count==1) {
                     sprite = new Sprite(new Texture("bulldozer.png"));
                     sprite.setSize(48,48);
@@ -132,8 +126,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.BULLDOZER;
-                            cursor = new Image(sprite.getTexture());
 
                         }
                     });
@@ -147,14 +139,14 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            currentState = State.ROAD;                          cursor = new Image(sprite.getTexture());
+                            currentState = State.ROAD;
                         }
                     });
 
                 }
 
                 if(count==3) {
-                    sprite = new Sprite(new Texture("road.bmp"));
+                    sprite = new Sprite(new Texture("rail.png"));
                     sprite.setSize(48,48);
                     icon = new SpriteDrawable(sprite);
                     button = new ImageButton(icon);
@@ -162,7 +154,6 @@ public class Hud implements InputProcessor{
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             currentState = State.RAIL;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -177,7 +168,6 @@ public class Hud implements InputProcessor{
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             currentState = State.POWER;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -192,7 +182,6 @@ public class Hud implements InputProcessor{
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             currentState = State.PARK;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -206,7 +195,6 @@ public class Hud implements InputProcessor{
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             currentState = State.RESIDENTIAL;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -220,7 +208,6 @@ public class Hud implements InputProcessor{
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             currentState = State.COMMERCIAL;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -233,7 +220,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.INDUSTRIAL;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -245,7 +231,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.FIRE;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -257,7 +242,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.POLICE;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -269,7 +253,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.STADIUM;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -281,7 +264,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.SEAPORT;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -294,7 +276,6 @@ public class Hud implements InputProcessor{
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             currentState = State.COAL;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -307,7 +288,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.NUCLEAR;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -319,7 +299,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.AIRPORT;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -331,7 +310,6 @@ public class Hud implements InputProcessor{
                     button.addListener(new ClickListener(){
                         @Override public void clicked(InputEvent event, float x, float y) {
                             currentState = State.DRAG;
-                            cursor = new Image(sprite.getTexture());
                         }
                     });
 
@@ -344,16 +322,6 @@ public class Hud implements InputProcessor{
                 // affect the type of building placed
             }
         }
-        //for testing
-        TextButton taxes = new TextButton("Collect Taxes", skin);
-        taxes.addListener(new ClickListener(){
-            @Override public void clicked(InputEvent event, float x, float y) {
-                city.collectTaxes();
-                fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
-            }
-        });
-        stage.addActor(taxes);
-
     }
 
     @Override
@@ -374,6 +342,7 @@ public class Hud implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println(currentState.toString());
+
         fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
         popLabel.setText("" + String.format("%07d", city.getPopulation()));
         timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
@@ -396,7 +365,6 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        //cursor.setPosition((screenX/16) * 16, ((Gdx.graphics.getHeight() - screenY)/16)*16);
         timeLabel.setText(""+(System.currentTimeMillis()-startTime)/1000);
         return false;
     }
