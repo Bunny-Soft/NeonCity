@@ -7,6 +7,11 @@ import java.util.ArrayList;
  * Created by Luis on 5/16/2017 and Changed by Zach on 5/20/17.
  */
 
+/**
+ * City class contains everything that makes a city in our game
+ * If we save all the global variables, and reload them, we would be able to
+ *
+ */
 public class City {
     //all values that determine how the city is doing and how it can be interacted with
     private String cityName;
@@ -19,25 +24,36 @@ public class City {
     public int months;
 
     public ArrayList<Building> buildings; //arraylist to keep track of all buildings in one location
-
-    public City(String cityName, Integer funds){ //takes in city name from cityCreator screen and starting funds based on difficulty chosen
+  
+    /**
+     * Creates a new City with set name and funds
+     * @param cityName
+     * name of the city
+     * @param funds
+     *starting funds of the city
+     */
+    public City(String cityName, Integer funds){
         this.cityName = cityName;
 
         this.funds = funds;
-        this.population = 500; //base populus
-        pollution = 0; //base pollution
-        happiness = 100; //base happiness
-        power = 100; //base power
+        this.population = 0;
+        pollution = 0;
+        happiness = 100;
+        power = 0;
         buildings = new ArrayList<Building>();
         tiles = new Tile[256][256]; //map
         months = 0; //timer
 
     }
 
-    public void collectTaxes(){ //to collect extra money you give up happiness, a multiplier on all other benefits
 
-        setFunds (Integer.sum((int)Math.ceil(population * 2), funds.intValue()));
-        happiness = happiness - (int)(happiness/10);
+    /**
+     * Called by the PlayScreen to collect taxes every 12 months
+     * collecting taxes makes people unhappy
+     */
+    public void collectTaxes(){
+        setFunds (Integer.sum((int)Math.ceil(population *1.5), funds.intValue()));
+        happiness = happiness - (int)(happiness/15);
     }
 
     public String getCityName() {

@@ -56,10 +56,12 @@ public class Hud implements InputProcessor{
     public Label popLabel;
     public Label nameLabel;
     public Label timeLabel;
+
     private Label powLabel;
     private  Label hapLabel;
     private  Label polLabel;
     public Label endLabel;  // Label that appears only when end game conditions are reached
+
     private long startTime = System.currentTimeMillis();
 
     /**
@@ -105,12 +107,14 @@ public class Hud implements InputProcessor{
         popLabel = new Label(String.format("%08d", city.getPopulation()), style);
         nameLabel = new Label(city.getCityName(), style);
         timeLabel = new Label("00:00",style);
+
         powLabel = new Label(String.format("%04d", city.getPower()), style);
         hapLabel = new Label("%03d" + city.getHappiness(), style);
         polLabel = new Label(String.format("%03d", city.getPollution()), style);
         endLabel = new Label("",style);
         endLabel.setPosition(Gdx.graphics.getWidth()/2-150,Gdx.graphics.getHeight()/2);
         // adding factor labels to the table
+
         table.add(timeLabel).expandX().padTop(10);
         table.add(nameLabel).expandX().padTop(10);
         table.add(fundsLabel).expandX().padTop(10);
@@ -362,6 +366,7 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
         System.out.println(currentState.toString()); // prints out the building type to the console
         // every time the user clicks, the city factors are updated
         fundsLabel.setText("$" + String.format("%07d", city.getFunds()));
@@ -386,6 +391,7 @@ public class Hud implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) { return false; }
+
 
     @Override
     public boolean scrolled(int amount) {
