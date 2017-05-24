@@ -129,11 +129,11 @@ public class CityCreator implements Screen {
                 try {
 
                 if(cityDifficulty.getSelected().equals("Easy"))
-                    cityFunds = 20000;
-                else if(cityDifficulty.getSelected().equals("Medium"))
                     cityFunds = 10000;
+                else if(cityDifficulty.getSelected().equals("Medium"))
+                    cityFunds = 50000;
                 else if(cityDifficulty.getSelected().equals("Hard"))
-                    cityFunds = 5000;
+                    cityFunds = 3000;
                 else
                     cityFunds = 0;
                 }

@@ -77,4 +77,9 @@ public class Building extends Actor {
             if(inUse)
             city.setPollution(city.getPollution() + pollutionCreated);
     }
+
+    public void addFunction()
+    {
+
+    }
 }
