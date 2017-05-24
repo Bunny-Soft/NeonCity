@@ -23,12 +23,13 @@ public class TileAndSpriteRenderer extends OrthogonalTiledMapRenderer {
      * city to be rendered
      */
     public TileAndSpriteRenderer(TiledMap map, City city) {
-        super(map);
+        super(map); //Map renderer super class created
         this.city = city;
     }
 
     @Override
     public void render() {
+
         //renders the map first
         super.render();
 
@@ -38,7 +39,8 @@ public class TileAndSpriteRenderer extends OrthogonalTiledMapRenderer {
             b.sprite.draw(this.getBatch(), 1f);
             //then the label on top of it
             b.pop.draw(this.getBatch(), 1f);
+
         }
-        this.getBatch().end();
+        this.getBatch().end(); //closing resource leak
     }
 }

@@ -21,15 +21,15 @@ public class IndustrialBuilding extends Building {
     public IndustrialBuilding(Vector3 local, City city, Boolean inUse){
         super(local, city, inUse, 4, 5000);
 
-        loc = local;
+        loc = local; //location on map
 
         sprite = new Image(new Texture("ind.png"));
-        sprite.setPosition(loc.x, loc.y);
+        sprite.setPosition(loc.x, loc.y); //location on the map that sprite is rendered
 
 
 
         try {
-            skin = new Skin(Gdx.files.internal("uiskin.json"));
+            skin = new Skin(Gdx.files.internal("uiskin.json")); //create skin from file
         }
         catch (Exception e){
             skin = new Skin();

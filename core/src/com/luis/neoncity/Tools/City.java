@@ -13,6 +13,7 @@ import java.util.ArrayList;
  *
  */
 public class City {
+    //all values that determine how the city is doing and how it can be interacted with
     private String cityName;
     private Integer funds;
     private Integer population;
@@ -22,8 +23,8 @@ public class City {
     public Tile[][] tiles;
     public int months;
 
-    public ArrayList<Building> buildings;
-
+    public ArrayList<Building> buildings; //arraylist to keep track of all buildings in one location
+  
     /**
      * Creates a new City with set name and funds
      * @param cityName
@@ -40,10 +41,11 @@ public class City {
         happiness = 100;
         power = 0;
         buildings = new ArrayList<Building>();
-        tiles = new Tile[256][256];
-        months = 0;
+        tiles = new Tile[256][256]; //map
+        months = 0; //timer
 
     }
+
 
     /**
      * Called by the PlayScreen to collect taxes every 12 months
