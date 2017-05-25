@@ -148,15 +148,14 @@ public class CityCreator implements Screen {
 					sb.begin();
 				}
 				//easter egg
-				if(cityName.getInput().equals("WannaCry")){
-					Image i = new Image(new Texture("cry.jpg"));
-					i.setSize(1366, 768);
-					stage.addActor(i);
-				}
-				else{
-
 					try {
-						game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds), mapName));
+                        if(cityName.getInput().equals("WannaCry")){
+                            Image i = new Image(new Texture("cry.jpg"));
+                            i.setSize(1366, 768);
+                            stage.addActor(i);
+                        }
+                        else
+						    game.setScreen(new PlayScreen(game, sb, new City(cityName.getInput(),cityFunds), mapName));
 					}
 					catch(Exception e)
 					{
@@ -167,7 +166,7 @@ public class CityCreator implements Screen {
 						stage.addActor(error);
 						sb.begin();
 					}
-				}
+				
 			}
 		});
 
