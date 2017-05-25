@@ -41,9 +41,9 @@ public class IndustrialBuilding extends Building {
         }
 
         populationNeeded = (int)(Math.random()*15+30); //random requirement of residents
-        pollutionCreated = 15; //specific pollution to building type
+        pollutionCreated = 5; //specific pollution to building type
         powerNeeded = 50;
-        fundsAdded = populationNeeded*city.getHappiness() + 0.0 ;
+        fundsAdded = 5000 + populationNeeded*city.getHappiness() + 0.0 ;
 
 
     }

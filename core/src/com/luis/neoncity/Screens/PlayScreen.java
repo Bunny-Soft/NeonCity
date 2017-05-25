@@ -39,7 +39,7 @@ public class PlayScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private long startTime = System.currentTimeMillis();
-    private boolean taxesCollected;
+    private boolean taxesCollected = false;
     private int month;
 
     public PlayScreen(NeonCity game, SpriteBatch sb, City city, String mapName) {
@@ -114,7 +114,7 @@ public class PlayScreen implements Screen {
         //sets and checks the win and lose conditions
         if(city.getPopulation() >= 2500)
             hud.endLabel.setText("YOU WIN!");
-        if(city.getHappiness() <= 0)
+        if(city.getHappiness() <= 0 || city.getPollution() >= 500)
             hud.endLabel.setText("YOU LOSE!");
     }
 

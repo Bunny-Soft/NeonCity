@@ -75,6 +75,10 @@ public class Building extends Actor { //super class of all other buildings that 
         return pollutionCreated;
     }
 
+    public int getPowerNeeded() {
+        return powerNeeded;
+    }
+
     public void addPollution()
     {
             if(inUse)

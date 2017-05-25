@@ -36,10 +36,10 @@ public class City {
         this.cityName = cityName;
 
         this.funds = funds;
-        this.population = 0;
+        this.population = 50;
         pollution = 0;
         happiness = 100;
-        power = 0;
+        power = 100;
         buildings = new ArrayList<Building>();
         tiles = new Tile[256][256]; //map
         months = 0; //timer

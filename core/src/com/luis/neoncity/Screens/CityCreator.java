@@ -130,15 +130,15 @@ public class CityCreator implements Screen {
 				try {
 				//sets city funds
 				if(cityDifficulty.getSelected().equals("Easy"))
-					cityFunds = 10000;
+					cityFunds = 25000;
 				else if(cityDifficulty.getSelected().equals("Medium"))
-					cityFunds = 50000;
+					cityFunds = 20000;
 				else if(cityDifficulty.getSelected().equals("Hard"))
-					cityFunds = 3000;
+					cityFunds = 13000;
 				else
 					cityFunds = 0;
 				}
-				//if requirements arent fullfilled, error is displayed for player to correct
+				//if requirements aren't fulfilled, error is displayed for player to correct
 				catch(Exception e)
 				{
 					Label error = new Label("", skin);

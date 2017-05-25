@@ -18,7 +18,7 @@ public class RecreationalBuilding extends Building {
     protected int happinessAdded;
 
     public RecreationalBuilding(Vector3 loc, City city, Boolean inUse){
-        super(loc, city, inUse, 3, 100);
+        super(loc, city, inUse, 3, 1000);
 
         sprite = new Image(new Texture("com.png"));
         sprite.setPosition(loc.x, loc.y);

@@ -42,7 +42,7 @@ public class Nuclear extends Building {//view building class for clarification
         }
 
         populationNeeded = (int)(Math.random()*15+30); //random requirement of residents
-        pollutionCreated = 15; //specific pollution to building type
+        pollutionCreated = 8; //specific pollution to building type
         powerAdded = populationNeeded*5;
 
 

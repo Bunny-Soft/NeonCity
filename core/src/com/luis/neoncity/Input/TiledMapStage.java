@@ -96,7 +96,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 
 		Building res = null;
 		//creates a new building when clicked, based on selected building,
-		//available funds, use-abilitity of that plot
+		//available funds, use-ability of that plot
 		if (hud.currentState != Hud.State.DRAG){
 			if(hud.currentState == Hud.State.BULLDOZER) {
 				if (city.tiles[(int) pos.x / 16][(int) pos.y / 16].getBuilding() != 0)
@@ -139,7 +139,7 @@ public class TiledMapStage extends Stage implements InputProcessor{
 			else if (hud.currentState == Hud.State.AIRPORT)
 				res = new Airport(pos, city, true);
 			}
-			if (res != null && city.getFunds() >= res.cost && isPlaceable(pos, res.size)) {
+			if (res != null && city.getFunds() >= res.cost && city.getPopulation() >= res.getPopulationNeeded() && city.getPower() >= res.getPowerNeeded() && isPlaceable(pos, res.size)) {
         		res.setTilesUnusable();
 				city.getBuildings().add(res);
 				city.tiles[(int)pos.x/16][(int)pos.y/16].setBuilding(city.getBuildings().size() - 1);

@@ -23,7 +23,7 @@ public class Park extends Building {
     protected Skin skin; //global skin
 
     public Park(Vector3 local, City city, Boolean inUse){
-        super(local, city, inUse, 1, 10); //making the super constructor
+        super(local, city, inUse, 1, 1000); //making the super constructor
 
         loc = local;
 

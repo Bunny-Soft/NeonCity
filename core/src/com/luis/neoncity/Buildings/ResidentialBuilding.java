@@ -24,7 +24,7 @@ public class ResidentialBuilding extends Building { //view building class for cl
     protected Skin skin;
 
     public ResidentialBuilding(Vector3 local, City city, Boolean inUse){
-        super(local, city, inUse, 3, 100);
+        super(local, city, inUse, 3, 2000);
 
         loc = local;
 
